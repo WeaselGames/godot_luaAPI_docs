@@ -1,0 +1,12 @@
+site_name: Godot LuaAPI
+repo_url: https://github.com/WeaselGames/godot_luaAPI
+
+theme:
+  name: readthedocs
+  logo: assets/luaapi_logo.png
+  favicon: assets/weasel_games_logo.png
+  highlightjs: true
+  hljs_languages:
+    - gdscript
+    - lua
+    - swift
