@@ -1,0 +1,61 @@
+site_name: Godot LuaAPI
+repo_url: https://github.com/WeaselGames/godot_luaAPI
+plugins:
+  - search
+extra:
+  version:
+    provider: mike
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      toc_depth: 3
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - tables
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+
+nav:
+  - index.md
+  - Getting Started:
+      - getting_started/before_you_start.md
+      - getting_started/installation.md
+  - Classes:
+      - classes/lua_api.md
+      - classes/lua_thread.md
+      - classes/lua_error.md
+
+theme:
+  name: material
+  logo: assets/weasel_games_logo.png
+  favicon: assets/weasel_games_logo.png
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: indigo
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: indigo
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
