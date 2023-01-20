@@ -1,17 +1,40 @@
-# Welcome to MkDocs
+# Home
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Godot LuaAPI V2.0-alpha
+!!! warning
+    This is an **alpha** version of the module made for Godot v4-beta. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for Godot v3.x.
 
-## Commands
+<figure markdown>  
+  ![Godot LuaAPI logo](./assets/luaapi_logo.png)
+  <figcaption>Art created by <a href="https://www.instagram.com/redheadalex1" target="_blank">Alex</a></figcaption>
+</figure>
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+This is a Godot engine module that adds Lua API support via GDScript. Importantly this is **NOT** meant to be a replacement for or alternative to GDScript. This module provides no functionality to program your game out of the box. This module allows you to create custom modding API's in a sandboxed environment. You have control of what people can and can not do within that sandbox.
 
-## Project layout
+To use you can either [Compile from source](getting_started/installation#compiling-from-source) or you can download one of the [nightly builds](getting_started/installation#nightly-builds).
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+By default the Lua print function is set to print to the GDEditor console. This can be changed by exposing your own print function as it will overwrite the existing one.
+
+**Some things to note**, this is not the only way to support Modding in your game. It's also not the only way to support Lua Modding in your game. In fact, using this mod to create your Modding API will likely take a lot more work than using native scripts for Modding. However, the advantage using luaAPI over native scripts is that the Lua code is sandboxed. No one can access parts of the engine that you don't explicitly give access to.
+
+If you are looking to make your game using Lua or would like to support Modding without worrying about a sandbox, check out one of these projects:
+
+- [luascript](https://github.com/perbone/luascript) by [perbone](https://github.com/perbone)
+- [godot-lua-pluginscript](https://github.com/gilzoide/godot-lua-pluginscript) by [gilzoide](https://github.com/gilzoide)
+  <br />
+
+## Features
+
+- Run Lua directly from a string or a text file.
+- Push any Variant as a global.
+- Call Lua functions from GDScript.
+- Choose which libraries you want Lua to have access to.
+- Custom LuaCallable type which allows you to get a Lua function as a Callable.
+- LuaError type which is used to report any errors this module or Lua run into.
+- LuaThread type which creates a Lua thread. This is not a OS thread but a coroutine.
+- Object passed as userdata.
+- Objects can override most of the Lua metamethods. I.E. \_\_index by defining a function with the same name.
+- Callables passed as userdata, which allows you to push a Callable as a Lua function.
+- Basic types are passed as userdata (currently: Vector2, Vector3, Color, Rect2, Plane) with a useful metatable.
+
+If a feature is missing that you would like to see feel free to create a [Feature Request](https://github.com/WeaselGames/lua/issues/new?assignees=&labels=feature%20request&template=feature_request.md&title=) or submit a PR.
