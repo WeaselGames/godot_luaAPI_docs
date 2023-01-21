@@ -20,7 +20,7 @@ The first thing you will need to do is obtain a copy of the editor built with th
 `git clone https://github.com/godotengine/godot`
 - Next cd into godot/modules and clone this repo  
 `cd godot/modules`  
-`git clone https://github.com/WeaselGames/godot_luaAPI`
+`git clone --recurse-submodules https://github.com/WeaselGames/godot_luaAPI luaAPI`
 
 ### Compiling
 This module does not requires any extra tooling to compile besides that required by Godot its self. So from this point you can follow the tutorial on the [Godot wiki](https://docs.godotengine.org/en/latest/contributing/development/compiling/index.html).
