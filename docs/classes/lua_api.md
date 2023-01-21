@@ -3,18 +3,22 @@
 ## Description
 
 The LuaAPI class is used to interact with Lua from GDScript.  
+
 This class provides the methods to execute Lua code; to call Lua functions from GDScript; to read and write the value of global Lua variables; to create a Lua constructor for a GDScript class and more.
 
 ## Methods
 
-### bind_libs _void_ {#bind_libs}
+### bind_libraries _void_ {#bind_libraries}
 
 Takes an array of strings and binds the Lua state to each library. It is case insensitive.  
-Please keep in mind that some libraries like IO and OS can be dangerous to use.
+
+!!! danger
+	The IO and OS libraries have some dangerous methods such as `os.execute` or `io.write`. Make these libraries available to the end user at your own risk.
+
+!!! info
+	You can learn more about the available libraries and their methods in the official [Lua manual](http://www.lua.org/manual/5.4/manual.html#6).
 
 #### Parameters
-
-
 
 | Parameters         | Description                                                                                                                                                               |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -26,15 +30,16 @@ _void_
 
 #### Example
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
 
 func _ready():
 	lua = LuaAPI.new()
-	#All libraries are available. Use the OS and IO libraries at your own risk.
-	lua.bind_libs(["base", "table", "string"])
+	# All libraries are available.
+	# Use the OS and IO libraries at your own risk.
+	lua.bind_libraries(["base", "table", "string"])
 ```
 
 ---
@@ -42,6 +47,7 @@ func _ready():
 ### call_function *Variant* {#call_function}
 
 Calls a global Lua function from GDscript.  
+
 You can pass any number of arguments to the Lua function by adding them to the array parameter.
 
 #### Parameters
@@ -56,8 +62,8 @@ You can pass any number of arguments to the Lua function by adding them to the a
 _Variant_
 
 #### Example
-
-```gdscript
+	
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
@@ -65,17 +71,28 @@ var lua: LuaAPI
 func _ready():
 	lua = LuaAPI.new()
 	lua.do_file("user://file.lua")
-	#Call the "test" Lua function with "Val1", 2 and true as arguments.
+
+	# Call the "test" Lua function with "Val1", 2 and true as arguments.
 	lua.call_function("test", ["Val1", 2, true])
 ```
+??? example "Example: user://file.lua"
+	```lua title="user://file.lua"
+	function test(myString, myNumber, myBoolean)
+		print("I got "..myString..", "..tostring(myNumber)..", "..tostring(myBoolean))
+	end
+	```
+	``` title="Output"
+	I got Val1, 2, true
+	```
 
 ---
 
-### do_file *LuaError* {#do_file}
+### do_file *[LuaError](lua_error.md)?* {#do_file}
 
 Loads a file by its **absolute path** into the Lua state.
 
-You might experience issues when loading a file in the "res://" directory after the game has been exported. In this case, it is recommended to load the file's contents as a string and use the do_string method instead.
+!!! warning
+    You might experience issues when loading a file in the "res://" directory after the game has been exported. In this case, it is recommended to load the file's contents as a string and use the [do_string](#do_string) method instead.
 
 #### Parameters
 
@@ -85,7 +102,7 @@ You might experience issues when loading a file in the "res://" directory after 
 
 #### Returns
 
-_LuaError_
+*[LuaError](lua_error.md)* or `#!gdscript null` depending on whether there is an error or not.
 
 #### Example
 
@@ -101,7 +118,7 @@ func _ready():
 
 ---
 
-### do_string *LuaError* {#do_string}
+### do_string *[LuaError](lua_error.md)?* {#do_string}
 
 Loads the content of a string into the Lua state, executing it.
 
@@ -113,7 +130,7 @@ Loads the content of a string into the Lua state, executing it.
 
 #### Returns
 
-_LuaError_
+*[LuaError](lua_error.md)* or `#!gdscript null` depending on whether there is an error or not.
 
 #### Examples
 
@@ -129,47 +146,49 @@ func _ready():
 
 ---
 
-### expose_constructor *LuaError* {#expose_constructor}
+### expose_constructor *[LuaError](lua_error.md)?* {#expose_constructor}
+
+Exposes the constructor of a class to Lua as a global method.
 
 #### Parameters
 
 | Parameters                | Description                         |
 | ------------------------- | ----------------------------------- |
-| gdscriptClass: `Object`   | A GDScript class.                   |
 | constructorName: `String` | The name of the constructor in Lua. |
+| gdscriptClass: `Object`   | A GDScript class or any Object that can be created with the `.new` method.                   |
+
 
 #### Returns
 
-_LuaError_
+*[LuaError](lua_error.md)* or `#!gdscript null` depending on whether there is an error or not.
 
 #### Examples
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 var lua: LuaAPI
+
 class Player:
 	var pos = Vector2(0, 0)
-	#If lua_funcs is not defined or returns an empty array, all class methods will be available in Lua.
+	# If lua_funcs is not defined or returns an empty array, all class methods will be available in Lua.
 	func lua_funcs():
 		return ["move_forward"]
-	#lua_fields behaves similarly to lua_funcs but for fields.
+	# lua_fields behaves similarly to lua_funcs but for fields.
 	func lua_fields():
 		return ["pos"]
 
 	func move_forward():
 		pos.x += 1
 
-var player2: Player
-
 func _ready():
 	lua = LuaAPI.new()
-	lua.expose_constructor(Player, "Player")
+	lua.expose_constructor("Player", Player)
 	lua.do_string("player = Player() player.move_forward() print(player.pos.x)")
 	var player = lua.pull_variant("player")
 	print(player.pos)
 ```
 
-The string passed to _do_string_ is the following Lua code:
+The string passed to `lua.do_string` is the following Lua code:
 
 ```lua
 player = Player()
@@ -181,7 +200,7 @@ print(player.pos.x)
 
 ### function_exists *bool* {#function_exists}
 
-Returns true if there is a Lua function with the provided name.
+Returns `#!gdscript true` if there is a Lua function with the provided name.
 
 #### Parameters
 
@@ -203,12 +222,25 @@ var lua: LuaAPI
 func _ready():
 	lua = LuaAPI.new()
 	lua.do_file("user://file.lua")
-	#Assuming the code in file.lua defined a Lua function with the name "test", the following statement should print("yes").
-	if(lua_function_exists("test")):
+
+	# Check if the "test" Lua function is defined.
+	if(lua.function_exists("test")):
 		print("yes")
 	else:
 		print("no")
 ```
+
+??? example "Example: user://file.lua"
+	```lua title="user://file.lua"
+	-- The "test" function is defined in Lua.
+	function test()
+		-- Code here...
+	end
+	```
+	``` title="Output"
+	yes
+	```
+
 
 ---
 
@@ -228,23 +260,26 @@ _Variant_
 
 #### Example
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.expose_constructor(Player, "Player")
-	lua.do_string("myNumber = 13")
-	#Read the value of myNumber
+	lua.do_string("myNumber = 10")
+
+	# Read the value of myNumber.
 	var my_number = lua.pull_variant("myNumber")
 	print(my_number)
+```
+``` title="Output"
+10
 ```
 
 ---
 
-### push_variant *LuaError* {#push_variant}
+### push_variant *[LuaError](lua_error.md)?* {#push_variant}
 
 Pushes a copy of a variant (`value`) to the Lua stack as the global variable `variableName`.
 
@@ -252,23 +287,27 @@ Pushes a copy of a variant (`value`) to the Lua stack as the global variable `va
 
 | Parameters             | Description                           |
 | ---------------------- | ------------------------------------- |
-| value: `Variant`       | The value to be assigned.             |
-| variableName: `String` | The name of the Lua variable to read. |
+| variableName: `String` | The name of the Lua variable to write to. |
+| value: `Variant`       | The value to be written.             |
+
 
 #### Returns
 
-_LuaError_
+*[LuaError](lua_error.md)* or `#!gdscript null` depending on whether there is an error or not.
 
 #### Example
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
-var test = "Hello lua!"
+var test = "Hello Lua!"
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.push_variant(test, "str")
+	lua.push_variant("str", test)
 	lua.do_string("print(str)")
+```
+``` title="Output"
+Hello Lua!
 ```
