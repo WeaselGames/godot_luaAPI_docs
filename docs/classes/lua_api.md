@@ -70,6 +70,7 @@ var lua: LuaAPI
 
 func _ready():
 	lua = LuaAPI.new()
+	lua.bind_libraries(["base"])
 	lua.do_file("user://file.lua")
 
 	# Call the "test" Lua function with "Val1", 2 and true as arguments.

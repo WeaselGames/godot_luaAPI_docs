@@ -143,6 +143,7 @@ var thread: LuaThread
 
 func _ready():
 	lua = LuaAPI.new()
+	lua.bind_libraries(["base"])
 	thread = LuaThread.new_thread(lua)
 	thread.load_file("user://file.lua")
 	thread.resume()
