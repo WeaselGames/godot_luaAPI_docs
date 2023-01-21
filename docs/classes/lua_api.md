@@ -106,7 +106,7 @@ Loads a file by its **absolute path** into the Lua state.
 
 #### Example
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
@@ -134,7 +134,7 @@ Loads the content of a string into the Lua state, executing it.
 
 #### Examples
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
@@ -214,7 +214,7 @@ _bool_
 
 #### Example
 
-```gdscript
+```gdscript linenums="1"
 extends Node2D
 
 var lua: LuaAPI
