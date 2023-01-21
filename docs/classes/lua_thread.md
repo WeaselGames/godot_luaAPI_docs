@@ -101,7 +101,7 @@ _Variant_
 
 ### is_done _bool_ {#is_done}
 
-Returns true if the thread has finished executing.
+Returns `#!gdscript true` if the thread has finished executing.
 
 #### Parameters
 
