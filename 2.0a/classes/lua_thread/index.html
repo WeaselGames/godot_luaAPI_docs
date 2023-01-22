@@ -425,7 +425,7 @@
         
           <li class="md-nav__item">
   <a href="#load_file" class="md-nav__link">
-    load_file LuaError
+    load_file LuaError?
   </a>
   
 </li>
@@ -451,13 +451,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#call_function" class="md-nav__link">
+    call_function Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expose_constructor" class="md-nav__link">
+    expose_constructor LuaError?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function_exists" class="md-nav__link">
+    function_exists bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull_variant" class="md-nav__link">
+    pull_variant Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_variant" class="md-nav__link">
+    push_variant LuaError?
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example_4" class="md-nav__link">
     Example
   </a>
   
@@ -549,7 +584,7 @@
         
           <li class="md-nav__item">
   <a href="#load_file" class="md-nav__link">
-    load_file LuaError
+    load_file LuaError?
   </a>
   
 </li>
@@ -575,13 +610,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#call_function" class="md-nav__link">
+    call_function Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expose_constructor" class="md-nav__link">
+    expose_constructor LuaError?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#function_exists" class="md-nav__link">
+    function_exists bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull_variant" class="md-nav__link">
+    pull_variant Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_variant" class="md-nav__link">
+    push_variant LuaError?
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example_4" class="md-nav__link">
     Example
   </a>
   
@@ -652,8 +722,13 @@
 <h4 id="returns_1">Returns</h4>
 <p><em>void</em></p>
 <hr />
-<h3 id="load_file">load_file <em><a href="../lua_error/">LuaError</a></em></h3>
+<h3 id="load_file">load_file <em><a href="../lua_error/">LuaError</a>?</em></h3>
 <p>Loads a file by its <strong>absolute path</strong> into the thread's state.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method simply loads the contents of the file into the Lua state. It does <strong>not</strong> execute it.<br />
+You must use the <a href="#resume">resume</a> method to execute the code that was loaded.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You might experience issues when loading a file in the "res://" directory after the game has been exported. In this case, it is recommended to load the file's contents as a string and use the <a href="#load_string">load_string</a> method instead.</p>
@@ -669,14 +744,20 @@
 <tbody>
 <tr>
 <td>filePath: <code>String</code></td>
-<td>path to the file.</td>
+<td>Path to the file.</td>
 </tr>
 </tbody>
 </table>
 <h4 id="returns_2">Returns</h4>
-<p><em><a href="../lua_error/">LuaError</a></em></p>
+<p><em><a href="../lua_error/">LuaError</a></em> or <code class="highlight"><span class="nb nb-Type">null</span></code> depending on whether there is an error or not.</p>
 <hr />
 <h3 id="load_string">load_string <em>void</em></h3>
+<p>Loads the content of a string into the Lua state.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method simply loads a string of Lua code into the Lua state. It does <strong>not</strong> execute it.<br />
+You must use the <a href="#resume">resume</a> method to execute the code that was loaded.</p>
+</div>
 <h4 id="parameters_3">Parameters</h4>
 <table>
 <thead>
@@ -688,7 +769,7 @@
 <tbody>
 <tr>
 <td>content: <code>String</code></td>
-<td>A string containing Lua code to be executed.</td>
+<td>A string containing Lua code to be loaded.</td>
 </tr>
 </tbody>
 </table>
@@ -696,20 +777,48 @@
 <p><em>void</em></p>
 <hr />
 <h3 id="resume">resume <em>Variant</em></h3>
-<p>Resumes or starts the thread. Will either return an Array of arguments passed by Lua through the yield() function or a LuaError.</p>
+<p>Resumes or starts the thread. Will either return an Array of arguments passed by Lua through the yield() function or a <a href="../lua_error/">LuaError</a>.</p>
 <h4 id="parameters_4">Parameters</h4>
 <p>None</p>
 <h4 id="returns_4">Returns</h4>
 <p><em>Variant</em></p>
 <hr />
 <h3 id="is_done">is_done <em>bool</em></h3>
-<p>Returns true if the thread has finished executing.</p>
+<p>Returns <code class="highlight"><span class="bp">true</span></code> if the thread has finished executing.</p>
 <h4 id="parameters_5">Parameters</h4>
 <p>None</p>
 <h4 id="returns_5">Returns</h4>
 <p><em>bool</em></p>
 <hr />
-<h2 id="example">Example</h2>
+<h3 id="call_function">call_function <em>Variant</em></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
+</div>
+<p>Calls a global Lua function from GDscript.  </p>
+<p>You can pass any number of arguments to the Lua function by adding them to the array parameter.</p>
+<h4 id="parameters_6">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>luaFunctionName: <code>String</code></td>
+<td>Name of the Lua function to be invoked.</td>
+</tr>
+<tr>
+<td>args: <code>Array</code></td>
+<td>Array of arguments to be passed to the Lua function.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_6">Returns</h4>
+<p><em>Variant</em></p>
+<h4 id="example">Example</h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -722,57 +831,353 @@
 <span class="normal"><a href="#__codelineno-0-10">10</a></span>
 <span class="normal"><a href="#__codelineno-0-11">11</a></span>
 <span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="c1">## Despite the name, this is not like a OS thread. It is a coroutine.</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">bind_libraries</span><span class="p">([</span><span class="s2">&quot;base&quot;</span><span class="p">])</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="bp">true</span><span class="w"> </span><span class="n">do</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">        </span><span class="o">--</span><span class="w"> </span><span class="nb">yield</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">exposed</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Lua</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">bound</span><span class="o">.</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">        </span><span class="nb">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="n">end</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="s2">&quot;)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="k">var</span><span class="w"> </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="k">var</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">    </span><span class="c1">## If the thread has finished executing or if not enough time has passed, do not resume the thread.</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span><span class="n">is_done</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">yieldTime</span><span class="p">:</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">        </span><span class="k">return</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="w">    </span><span class="c1">## thread.resume will either return a LuaError or an Array.</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">msg</span><span class="p">)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="w">        </span><span class="k">return</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="w">    </span><span class="c1">## Assumes the user will always pass the number of seconds to pause the thread for.</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">    </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;user://file.lua&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="c1"># Call the &quot;test&quot; Lua function with &quot;Val1&quot;, 2 and true as arguments.</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Val1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">])</span>
+</code></pre></div></td></tr></table></div>
+<details class="example">
+<summary>Example: user://file.lua</summary>
+<p><div class="highlight"><span class="filename">user://file.lua</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">function</span> <span class="nf">test</span><span class="p">(</span><span class="n">myString</span><span class="p">,</span> <span class="n">myNumber</span><span class="p">,</span> <span class="n">myBoolean</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I got &quot;</span><span class="o">..</span><span class="n">myString</span><span class="o">..</span><span class="s2">&quot;, &quot;</span><span class="o">..</span><span class="nb">tostring</span><span class="p">(</span><span class="n">myNumber</span><span class="p">)</span><span class="o">..</span><span class="s2">&quot;, &quot;</span><span class="o">..</span><span class="nb">tostring</span><span class="p">(</span><span class="n">myBoolean</span><span class="p">))</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kr">end</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>I got Val1, 2, true
+</code></pre></div></p>
+</details>
+<hr />
+<h3 id="expose_constructor">expose_constructor <em><a href="../lua_error/">LuaError</a>?</em></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
+</div>
+<p>Exposes the constructor of a class to Lua as a global method.</p>
+<h4 id="parameters_7">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>constructorName: <code>String</code></td>
+<td>The name of the constructor in Lua.</td>
+</tr>
+<tr>
+<td>gdscriptClass: <code>Object</code></td>
+<td>A GDScript class or any Object that can be created with the <code>.new</code> method.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_7">Returns</h4>
+<p><em><a href="../lua_error/">LuaError</a></em> or <code class="highlight"><span class="nb nb-Type">null</span></code> depending on whether there is an error or not.</p>
+<h4 id="examples">Examples</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="c1"># If lua_funcs is not defined or returns an empty array, all class methods will be available in Lua.</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">lua_funcs</span><span class="p">():</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;move_forward&quot;</span><span class="p">]</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="c1"># lua_fields behaves similarly to lua_funcs but for fields.</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">lua_fields</span><span class="p">():</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">]</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;player = Player() player.move_forward() print(player.pos.x)&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>The string passed to <code>thread.load_string</code> is the following Lua code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">player</span><span class="p">.</span><span class="n">move_forward</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="function_exists">function_exists <em>bool</em></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
+</div>
+<p>Returns <code class="highlight"><span class="bp">true</span></code> if there is a Lua function with the provided name.</p>
+<h4 id="parameters_8">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>functionName: <code>String</code></td>
+<td>The name of the Lua function to check.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_8">Returns</h4>
+<p><em>bool</em></p>
+<h4 id="example_1">Example</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;user://file.lua&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="c1"># Check if the &quot;test&quot; Lua function is defined.</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">function_exists</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)):</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<details class="example">
+<summary>Example: user://file.lua</summary>
+<p><div class="highlight"><span class="filename">user://file.lua</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- The &quot;test&quot; function is defined in Lua.</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kr">function</span> <span class="nf">test</span><span class="p">()</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="c1">-- Code here...</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kr">end</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>yes
+</code></pre></div></p>
+</details>
+<hr />
+<h3 id="pull_variant">pull_variant <em>Variant</em></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
+</div>
+<p>Reads the value of a variable by its name from the Lua state.</p>
+<h4 id="parameters_9">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>variableName: <code>String</code></td>
+<td>The name of the Lua variable to read.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_9">Returns</h4>
+<p><em>Variant</em></p>
+<h4 id="example_2">Example</h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;myNumber = 10&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">    </span><span class="c1"># Read the value of myNumber.</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;myNumber&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">my_number</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>10
+</code></pre></div></p>
+<hr />
+<h3 id="push_variant">push_variant <em><a href="../lua_error/">LuaError</a>?</em></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
+</div>
+<p>Pushes a copy of a variant (<code>value</code>) to the Lua stack as the global variable <code>variableName</code>.</p>
+<h4 id="parameters_10">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>variableName: <code>String</code></td>
+<td>The name of the Lua variable to write to.</td>
+</tr>
+<tr>
+<td>value: <code>Variant</code></td>
+<td>The value to be written.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_10">Returns</h4>
+<p><em><a href="../lua_error/">LuaError</a></em> or <code class="highlight"><span class="nb nb-Type">null</span></code> depending on whether there is an error or not.</p>
+<h4 id="example_3">Example</h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="k">var</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hello Lua!&quot;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;print(str)&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Hello Lua!
+</code></pre></div></p>
+<hr />
+<h2 id="example_4">Example</h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="k">var</span><span class="w"> </span><span class="n">thread</span><span class="p">:</span><span class="w"> </span><span class="n">LuaThread</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="c1"># Despite the name, this is not like a OS thread. It is a coroutine.</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">    </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaThread</span><span class="o">.</span><span class="n">new_thread</span><span class="p">(</span><span class="n">lua</span><span class="p">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="n">thread</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="bp">true</span><span class="w"> </span><span class="n">do</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">        </span><span class="o">--</span><span class="w"> </span><span class="nb">yield</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">exposed</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Lua</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">bound</span><span class="o">.</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">        </span><span class="nb">yield</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="n">end</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="s2">&quot;)</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="k">var</span><span class="w"> </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="k">var</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">    </span><span class="c1"># If the thread has finished executing or if not enough time has passed, do not resume the thread.</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span><span class="n">is_done</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">yieldTime</span><span class="p">:</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">        </span><span class="k">return</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">    </span><span class="c1"># thread.resume will either return a LuaError or an Array.</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">msg</span><span class="p">)</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">        </span><span class="k">return</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">    </span><span class="c1"># Assumes the user will always pass the number of seconds to pause the thread for.</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">    </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div></td></tr></table></div>
 
 

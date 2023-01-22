@@ -553,8 +553,11 @@
 <h2 id="compiling-from-source">Compiling from source</h2>
 <h3 id="getting-the-sources">Getting the sources</h3>
 <ul>
-<li>Start by cloning the main branch of the Godot engine <code>git clone https://github.com/godotengine/godot</code></li>
-<li>Next cd into godot/modules and clone this repo with <code>git clone https://github.com/WeaselGames/godot_luaAPI</code></li>
+<li>Start by cloning the main branch of the Godot engine<br />
+<code>git clone https://github.com/godotengine/godot</code></li>
+<li>Next cd into godot/modules and clone this repo<br />
+<code>cd godot/modules</code><br />
+<code>git clone --recurse-submodules https://github.com/WeaselGames/godot_luaAPI luaAPI</code></li>
 </ul>
 <h3 id="compiling">Compiling</h3>
 <p>This module does not requires any extra tooling to compile besides that required by Godot its self. So from this point you can follow the tutorial on the <a href="https://docs.godotengine.org/en/latest/contributing/development/compiling/index.html">Godot wiki</a>.</p>
