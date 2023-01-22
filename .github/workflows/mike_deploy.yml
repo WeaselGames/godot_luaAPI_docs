@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: actions/cache@v2
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
+      - run: git fetch origin gh-pages --depth=1
+      - run: pip install mkdocs-material
+      - run: pip install mike
+      - run: mike deploy --push 2.0a latest

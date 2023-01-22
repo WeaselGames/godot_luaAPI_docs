@@ -1,10 +1,12 @@
 # LuaError
 
 ## Description
-A LuaError represents an Error in Lua.  
+A LuaError represents an error that happened in Lua.  
   
-  Most functions in this module return either a LuaError or null. You may also return a LuaError object from a GDScript function called from Lua in order to cause an error in Lua.
-
+!!! info
+  	Most functions in this module return either a LuaError or null. 
+!!! tip
+	You may return a LuaError object from a GDScript function, called from Lua, in order to cause an error in Lua.
 ## Enumerations
 ### ErrorType
 | Name | Value | Description |
@@ -19,7 +21,7 @@ A LuaError represents an Error in Lua.
 ---
 
 ## Properties
-### msg _String_
+### message _String_
 A string containing the error message.
 
 ---
@@ -30,7 +32,7 @@ An enum representing the type of the error.
 ---
 
 ## Methods
-### new_err _LuaError_ {#new_err}
+### new_error _LuaError_ {#new_err}
 Static function that acts as a constructor for new instances of the LuaError class.
 
 #### Parameters
@@ -43,20 +45,26 @@ Static function that acts as a constructor for new instances of the LuaError cla
 _LuaError_
 
 #### Example
-```gdscript
+```gdscript linenums="1"
 func test(n: int):
 	if n != 5:
 		## This will raise an error in the Lua state.
-		return LuaError.new_err("N is not 5 but is %s" % n, LuaError.ERR_RUNTIME)
+		return LuaError.new_error("N is not 5 but is %s" % n, LuaError.ERR_RUNTIME)
 	return n+5
 
 func _ready():
-	lua = Lua.new()
-	lua.push_variant(test, "test")
+	lua = LuaAPI.new()
+	lua.push_variant("test", test)
 	## Most methods return a LuaError.
 	## Calling "test" with a type that is not a int would also raise a error.
 	var err = lua.do_string("test(6)")
 	## If an error does not occur, err will be null.
 	if err is LuaError:
-		print("ERROR %d: " % err.type + err.msg)
+		print("ERROR %d: " % err.type + err.message)
+```
+``` title="Output"
+ERROR 2: [LUA_ERRRUN - runtime error ]
+N is not 5 but is 6
+stack traceback:
+	[string "test(6)"]:1: in main chunk
 ```
