@@ -232,10 +232,10 @@ _Variant_
 ```gdscript linenums="1"
 extends Node2D
 
-var lua: LuaAPI
+var lua: Lua
 
 func _ready():
-	lua = LuaAPI.new()
+	lua = Lua.new()
 	lua.do_string("myNumber = 10")
 
 	# Read the value of myNumber.
