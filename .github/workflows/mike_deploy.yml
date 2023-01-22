@@ -21,6 +21,8 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
       - run: pip install mkdocs-material
       - run: pip install mike
       - run: mike deploy --push 2.0a latest
