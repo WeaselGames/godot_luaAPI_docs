@@ -32,8 +32,8 @@ nav:
 
 theme:
   name: material
-  logo: assets/weasel_games_logo.png
-  favicon: assets/weasel_games_logo.png
+  logo: assets/sandcastle_icon.png
+  favicon: assets/sandcastle_icon.png
   features:
     - navigation.instant
     - navigation.tracking
