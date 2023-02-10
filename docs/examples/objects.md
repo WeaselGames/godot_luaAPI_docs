@@ -1,5 +1,5 @@
 # Working with Objects in Lua
-Normally when using `push_variant()` or the return value of a GDScript function that Lua calls. The value is copied to Lua. However types that inherit from Objects work a bit differently. Objects will be pushed to Lua as [UserData](https://www.lua.org/pil/28.1.html). This means they are passed by reference to or from Lua. 
+Normally when using `push_variant()` or the return value of a GDScript function that Lua calls. The value is copied to Lua. However, types that inherit from Objects work a bit differently. Objects will be pushed to Lua as [UserData](https://www.lua.org/pil/28.1.html). This means they are passed by reference to or from Lua. 
 
 In order to call functions and get values from the object we assign the mt_Object metatable to it. This is a custom meta table we defined for Objects. This allows for methods to be called on the object, values to be get/set on the Object and much more.
 
@@ -74,7 +74,7 @@ func _ready():
 
 	if err is LuaError:
 		print(err.message)
-        
+
 	var player = lua.pull_variant("player")
 	print(player.pos)
 ```
