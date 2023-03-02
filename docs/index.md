@@ -2,7 +2,7 @@
 
 ## Godot LuaAPI V2.0-alpha
 !!! warning
-    This is an **alpha** version of the module made for Godot v4-beta. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for Godot v3.x.
+    this is an **alpha** version of the module made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for godot v3.x.
 
 <figure markdown>  
   ![Godot LuaAPI logo](./assets/luaapi_logo.png)
