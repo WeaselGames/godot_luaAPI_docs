@@ -29,6 +29,9 @@ nav:
       - classes/lua_api.md
       - classes/lua_thread.md
       - classes/lua_error.md
+  - Examples:
+      - examples/objects.md
+      - examples/lua_callable.md
 
 theme:
   name: material
