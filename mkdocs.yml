@@ -29,6 +29,7 @@ nav:
       - classes/lua_api.md
       - classes/lua_thread.md
       - classes/lua_error.md
+      - classes/lua_callable_extra.md
   - Examples:
       - examples/objects.md
       - examples/lua_callable.md
