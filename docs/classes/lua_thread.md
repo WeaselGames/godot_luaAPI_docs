@@ -18,7 +18,7 @@ Static method that creates and binds a LuaThread object to a LuaAPI object. This
 
 | Parameters | Description |
 | --- | --- |
-| lua: [`LuaAPI`](./LuaAPI) | The LuaAPI object to bind to. |
+| lua: [`LuaAPI`](lua_api.md) | The LuaAPI object to bind to. |
 
 #### Returns
 
@@ -34,7 +34,7 @@ Binds the thread to a LuaAPI object. All threads attached to the same object sha
 
 | Parameters | Description |
 | --- | --- |
-| lua: [`LuaAPI`](./LuaAPI) | The LuaAPI object to bind to. |
+| lua: [`LuaAPI`](lua_api.md) | The LuaAPI object to bind to. |
 
 #### Returns
 
