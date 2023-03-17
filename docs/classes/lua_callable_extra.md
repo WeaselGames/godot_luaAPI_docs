@@ -1,13 +1,13 @@
 # LuaCallableExtra
 
 ## Description
-A wrapper for [Callables](https://docs.godotengine.org/en/4.0/classes/class_callable.html) used to create functions that accept either any amount of arguments from Lua as a single [LuaTuple](./LuaTuple) parameter or that accept a reference to the [LuaAPI](./LuaAPI) object from which the method was invoked, or both.
+A wrapper for [Callables](https://docs.godotengine.org/en/4.0/classes/class_callable.html) used to create functions that accept either any amount of arguments from Lua as a single [LuaTuple](lua_tuple.md) parameter or that accept a reference to the [LuaAPI](lua_api.md) object from which the method was invoked, or both.
 
 ## Methods
 
 ### with_ref _LuaCallableExtra_ {#with_ref}
 
-Static method that creates a LuaCallableExtra. A reference to the [LuaAPI](./LuaAPI) object that invoked the method will be passed as an argument.
+Static method that creates a LuaCallableExtra. A reference to the [LuaAPI](lua_api.md) object that invoked the method will be passed as an argument.
 
 #### Parameters
 
@@ -42,14 +42,14 @@ I was invoked by <LuaAPI#-9223372010447437397>
 
 ### with_tuple _LuaCallableExtra_ {#with_tuple}
 
-Static method that creates a LuaCallableExtra. By specifying the number of expected arguments in this function, the module will be able to add all, if any, extra arguments to a [LuaTuple](./LuaTuple), which will always be the last parameter.
+Static method that creates a LuaCallableExtra. By specifying the number of expected arguments in this function, the module will be able to add all, if any, extra arguments to a [LuaTuple](lua_tuple.md), which will always be the last parameter.
 
 #### Parameters
 
 | Parameters | Description |
 | --- | --- |
 | callable: [`Callable`](https://docs.godotengine.org/en/4.0/classes/class_callable.html) | The associated callable. |
-| arg count: `number` | The number of expected arguments including the tuple one. |
+| arg count: `number` | The number of expected arguments excluding the tuple one. |
 
 #### Returns
 
@@ -85,19 +85,45 @@ func my_somator_function(args: LuaTuple):
 
 ### set_info _void_ {#bind}
 
-Alternative way to configure a [LuaCallableExtra](.\LuaCallableExtra). This method is particularly useful for methods that expect both a [LuaTuple](./LuaTuple) and a reference to the [LuaAPI](./LuaAPI) object.
+Alternative way to configure a [LuaCallableExtra](lua_callable_extra.md). This method is particularly useful for methods that expect both a [LuaTuple](lua_tuple.md) and a reference to the [LuaAPI](lua_api.md) object.
 
 #### Parameters
 
 | Parameters | Description |
 | --- | --- |
 | callable: [`Callable`](https://docs.godotengine.org/en/4.0/classes/class_callable.html) | The associated callable. |
-| arg count: `number` | The number of expected arguments including the tuple one. |
-| isTuple: `bool` | Wether or not the last parameter should be of the type [LuaTuple](./LuaTuple). |
-| wantsRef: `bool` | Wether or not to pass a reference to [LuaAPI](./LuaAPI) object. |
+| arg count: `number` | The number of expected arguments excluding the tuple one. |
+| isTuple: `bool` | Wether or not the last parameter should be of the type [LuaTuple](lua_tuple.md). |
+| wantsRef: `bool` | Wether or not to pass a reference to the [LuaAPI](lua_api.md) object. |
 
 #### Returns
 
 _void_
+
+#### Example
+
+```gdscript linenums="1"
+extends Node2D
+
+var lua: LuaAPI
+
+func _ready():
+	lua = LuaAPI.new()
+
+	# Wrap custom_print_function with a LuaCallableExtra.
+	var luaCallableExtra = LuaCallableExtra.new()
+	luaCallableExtra.set_info(custom_print_function, 1, true, true)
+
+	# This will replace the built-in print function with ours.
+	lua.push_variant("print", luaCallableExtra)
+    
+	lua.do_string("""
+		print('Hello!', ' How are you?', ' I havent seen you in ', 10, ' days.')
+	""")
+	
+func custom_print_function(lua_object: LuaAPI, args: LuaTuple):
+	print(args.to_array(), " -- ", lua_object)
+```
+
 
 ---
