@@ -30,6 +30,7 @@ nav:
       - classes/lua_thread.md
       - classes/lua_error.md
       - classes/lua_callable_extra.md
+      - classes/lua_tuple.md
   - Examples:
       - examples/objects.md
       - examples/lua_callable.md
