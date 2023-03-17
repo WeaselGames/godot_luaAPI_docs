@@ -13,7 +13,7 @@ This class provides the methods to execute Lua code; to call Lua functions from 
 Takes an array of strings and binds the Lua state to each library. It is case insensitive.  
 
 !!! danger
-	The IO and OS libraries have some dangerous methods such as `os.execute` or `io.write`. Make these libraries available to the end user at your own risk.
+	The IO, Package and OS libraries have some dangerous methods such as `os.execute`, `require` or `io.write`. Make these libraries available to the end user at your own risk.
 
 !!! info
 	You can learn more about the available libraries and their methods in the official [Lua manual](http://www.lua.org/manual/5.4/manual.html#6).
