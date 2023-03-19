@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../lua_thread/">
+        <link rel="prev" href="../lua_callable_extra/">
       
       
-        <link rel="next" href="../lua_callable_extra/">
+        <link rel="next" href="../../examples/objects/">
       
       <link rel="icon" href="../../assets/sandcastle_icon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>LuaError - Godot LuaAPI</title>
+        <title>LuaTuple - Godot LuaAPI</title>
       
     
     
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#luaerror" class="md-skip">
+        <a href="#luatuple" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LuaError
+              LuaTuple
             
           </span>
         </div>
@@ -375,6 +375,34 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../lua_error/" class="md-nav__link">
+        LuaError
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lua_callable_extra/" class="md-nav__link">
+        LuaCallableExtra
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -387,12 +415,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          LuaError
+          LuaTuple
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        LuaError
+        LuaTuple
       </a>
       
         
@@ -418,53 +446,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enumerations" class="md-nav__link">
-    Enumerations
-  </a>
-  
-    <nav class="md-nav" aria-label="Enumerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-    <nav class="md-nav" aria-label="Properties">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#message-string" class="md-nav__link">
-    message String
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-errortype" class="md-nav__link">
-    type ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     Methods
   </a>
@@ -473,8 +454,78 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new_err" class="md-nav__link">
-    new_error LuaError
+  <a href="#with_ref" class="md-nav__link">
+    from_array LuaTuple
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    clear void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_value" class="md-nav__link">
+    get_value Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_empty" class="md-nav__link">
+    is_empty bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    pop_back Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    pop_front Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    push_back void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    push_front void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_value" class="md-nav__link">
+    set_value void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    size number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to_array" class="md-nav__link">
+    to_array array
   </a>
   
 </li>
@@ -488,34 +539,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lua_callable_extra/" class="md-nav__link">
-        LuaCallableExtra
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lua_tuple/" class="md-nav__link">
-        LuaTuple
-      </a>
     </li>
   
 
@@ -626,53 +649,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enumerations" class="md-nav__link">
-    Enumerations
-  </a>
-  
-    <nav class="md-nav" aria-label="Enumerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-    <nav class="md-nav" aria-label="Properties">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#message-string" class="md-nav__link">
-    message String
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-errortype" class="md-nav__link">
-    type ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     Methods
   </a>
@@ -681,8 +657,78 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new_err" class="md-nav__link">
-    new_error LuaError
+  <a href="#with_ref" class="md-nav__link">
+    from_array LuaTuple
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    clear void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_value" class="md-nav__link">
+    get_value Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_empty" class="md-nav__link">
+    is_empty bool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_back" class="md-nav__link">
+    pop_back Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_front" class="md-nav__link">
+    pop_front Variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_back" class="md-nav__link">
+    push_back void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push_front" class="md-nav__link">
+    push_front void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_value" class="md-nav__link">
+    set_value void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    size number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to_array" class="md-nav__link">
+    to_array array
   </a>
   
 </li>
@@ -710,71 +756,13 @@
   
 
 
-<h1 id="luaerror">LuaError</h1>
+<h1 id="luatuple">LuaTuple</h1>
 <h2 id="description">Description</h2>
-<p>A LuaError represents an error that happened in Lua.  </p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Most functions in this module return either a LuaError or null. </p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You may return a LuaError object from a GDScript function, called from Lua, in order to cause an error in Lua.</p>
-</div>
-<h2 id="enumerations">Enumerations</h2>
-<h3 id="errortype">ErrorType</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ERR_TYPE</td>
-<td>1</td>
-<td>Invalid type error. For example, passing a string when an int was expected.</td>
-</tr>
-<tr>
-<td>ERR_RUNTIME</td>
-<td>2</td>
-<td>Lua runtime error.</td>
-</tr>
-<tr>
-<td>ERR_SYNTAX</td>
-<td>3</td>
-<td>Lua syntax error.</td>
-</tr>
-<tr>
-<td>ERR_MEMORY</td>
-<td>4</td>
-<td>Lua ran out of memory.</td>
-</tr>
-<tr>
-<td>ERR_ERR</td>
-<td>5</td>
-<td>Error while handling another error.</td>
-</tr>
-<tr>
-<td>ERR_FILE</td>
-<td>6</td>
-<td>Error while opening or reading a file.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="properties">Properties</h2>
-<h3 id="message-string">message <em>String</em></h3>
-<p>A string containing the error message.</p>
-<hr />
-<h3 id="type-errortype">type <a href="#errortype"><em>ErrorType</em></a></h3>
-<p>An enum representing the type of the error.</p>
-<hr />
+<p>The LuaTuple class is used to receive any number of arguments from Lua and to return any number of values to Lua.</p>
+<p>This class behaves like a stack but you can also convert it to and from an array.</p>
 <h2 id="methods">Methods</h2>
-<h3 id="new_err">new_error <em>LuaError</em></h3>
-<p>Static function that acts as a constructor for new instances of the LuaError class.</p>
+<h3 id="with_ref">from_array <em>LuaTuple</em></h3>
+<p>Static method that creates a LuaTuple with the contents of an array.</p>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -785,17 +773,13 @@
 </thead>
 <tbody>
 <tr>
-<td>message: <code>String</code></td>
-<td>The error message.</td>
-</tr>
-<tr>
-<td>type: <code>ErrorType</code></td>
-<td>An enum representing the type of this error.</td>
+<td>content: <code>array</code></td>
+<td>The content with which the tuple will be populated.</td>
 </tr>
 </tbody>
 </table>
 <h4 id="returns">Returns</h4>
-<p><em>LuaError</em></p>
+<p><em>LuaTuple</em></p>
 <h4 id="example">Example</h4>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -810,28 +794,193 @@
 <span class="normal"><a href="#__codelineno-0-11">11</a></span>
 <span class="normal"><a href="#__codelineno-0-12">12</a></span>
 <span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">):</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">        </span><span class="c1">## This will raise an error in the Lua state.</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">new_error</span><span class="p">(</span><span class="s2">&quot;N is not 5 but is </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">ERR_RUNTIME</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">5</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="c1">## Most methods return a LuaError.</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="c1">## Calling &quot;test&quot; with a type that is not a int would also raise a error.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;test(6)&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="c1">## If an error does not occur, err will be null.</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">err</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;getPosition&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_get_position</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="s2">    local x, y, z = getPosition()</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="s2">    print(x, y, z)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">func</span><span class="w"> </span><span class="n">my_get_position</span><span class="p">():</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">LuaTuple</span><span class="o">.</span><span class="n">from_array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ERROR 2: [LUA_ERRRUN - runtime error ]
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>N is not 5 but is 6
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>stack traceback:
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    [string &quot;test(6)&quot;]:1: in main chunk
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>10, 3, 7
 </code></pre></div></p>
+<hr />
+<h3 id="clear">clear <em>void</em></h3>
+<p>Removes all elements from the LuaTuple's stack.</p>
+<h4 id="parameters_1">Parameters</h4>
+<p>None</p>
+<h4 id="returns_1">Returns</h4>
+<p><em>void</em></p>
+<hr />
+<h3 id="get_value">get_value <em>Variant</em></h3>
+<p>Gets a value from the LuaTuple's stack at the specified index. It does not pop the value from the stack.</p>
+<h4 id="parameters_2">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index: <code>number</code></td>
+<td>The index of the value to get.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_2">Returns</h4>
+<p><em>Variant</em></p>
+<hr />
+<h3 id="is_empty">is_empty <em>bool</em></h3>
+<p>Returns <code class="highlight"><span class="bp">true</span></code> if the LuaTuple's stack is empty and false otherwise.</p>
+<h4 id="parameters_3">Parameters</h4>
+<p>None</p>
+<h4 id="returns_3">Returns</h4>
+<p><em>bool</em></p>
+<hr />
+<h3 id="pop_back">pop_back <em>Variant</em></h3>
+<p>Removes the last element from the LuaTuple's stack and returns it.</p>
+<h4 id="parameters_4">Parameters</h4>
+<p>None</p>
+<h4 id="returns_4">Returns</h4>
+<p><em>Variant</em></p>
+<hr />
+<h3 id="pop_front">pop_front <em>Variant</em></h3>
+<p>Removes the first element from the LuaTuple's stack and returns it.</p>
+<h4 id="parameters_5">Parameters</h4>
+<p>None</p>
+<h4 id="returns_5">Returns</h4>
+<p><em>Variant</em></p>
+<hr />
+<h3 id="push_back">push_back <em>void</em></h3>
+<p>Adds a value to the end of the LuaTuple's stack.</p>
+<h4 id="parameters_6">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value: <code>Variant</code></td>
+<td>The value to be added to the stack.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_6">Returns</h4>
+<p><em>void</em></p>
+<hr />
+<h3 id="push_front">push_front <em>void</em></h3>
+<p>Adds a value to the start of the LuaTuple's stack.</p>
+<h4 id="parameters_7">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>variableName: <code>String</code></td>
+<td>The name of the Lua variable to read.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_7">Returns</h4>
+<p><em>void</em></p>
+<hr />
+<h3 id="set_value">set_value <em>void</em></h3>
+<p>Sets the value at the specified index in the LuaTuple's stack.</p>
+<h4 id="parameters_8">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index: <code>number</code></td>
+<td>An integer representing the index.</td>
+</tr>
+<tr>
+<td>value: <code>Variant</code></td>
+<td>The value to be set.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_8">Returns</h4>
+<p><em>void</em></p>
+<hr />
+<h3 id="size">size <em>number</em></h3>
+<p>Returns the number of elements in the LuaTuple's stack.</p>
+<h4 id="parameters_9">Parameters</h4>
+<p>None</p>
+<h4 id="returns_9">Returns</h4>
+<p><em>number</em></p>
+<hr />
+<h3 id="to_array">to_array <em>array</em></h3>
+<p>Converts the LuaTuple's stack to an array.</p>
+<h4 id="parameters_10">Parameters</h4>
+<p>None</p>
+<h4 id="returns_10">Returns</h4>
+<p><em>array</em></p>
+<h4 id="example_1">Example</h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="c1"># Wrap custom_print_function with a LuaCallableExtra.</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">luaCallableExtra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaCallableExtra</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="n">luaCallableExtra</span><span class="o">.</span><span class="n">set_info</span><span class="p">(</span><span class="n">custom_print_function</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="c1"># This will replace the built-in print function with ours.</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;print&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">luaCallableExtra</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="s2">        print(&#39;Hello!&#39;, &#39; How are you?&#39;, &#39; I havent seen you in &#39;, 10, &#39; days.&#39;)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="k">func</span><span class="w"> </span><span class="n">custom_print_function</span><span class="p">(</span><span class="n">lua_object</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">LuaTuple</span><span class="p">):</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">to_array</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot; -- &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lua_object</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Example Output</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[&quot;Hello!&quot;, &quot; How are you?&quot;, &quot; I havent seen you in &quot;, 10, &quot; days.&quot;] -- &lt;LuaAPI#-9223372010447437394&gt;
+</code></pre></div></p>
+<hr />
 
 
 
@@ -858,7 +1007,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../lua_thread/" class="md-footer__link md-footer__link--prev" aria-label="Previous: LuaThread" rel="prev">
+          <a href="../lua_callable_extra/" class="md-footer__link md-footer__link--prev" aria-label="Previous: LuaCallableExtra" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -867,20 +1016,20 @@
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                LuaThread
+                LuaCallableExtra
               </div>
             </div>
           </a>
         
         
           
-          <a href="../lua_callable_extra/" class="md-footer__link md-footer__link--next" aria-label="Next: LuaCallableExtra" rel="next">
+          <a href="../../examples/objects/" class="md-footer__link md-footer__link--next" aria-label="Next: Working with Objects in Lua" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                LuaCallableExtra
+                Working with Objects in Lua
               </div>
             </div>
             <div class="md-footer__button md-icon">
