@@ -82,7 +82,7 @@ func _ready():
 	lua = LuaAPI.new()
 	lua.push_variant(
 		"somator",
-		LuaCallableExtra.with_tuple(my_somator_function, 1)
+		LuaCallableExtra.with_tuple(my_somator_function, 0)
 	)
 	lua.do_string("somator(1, 2, 3, 4)")
 	
