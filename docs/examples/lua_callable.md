@@ -1,7 +1,7 @@
 # The LuaCallable Type
 
 ## Description
-The LuaCallable type is an extends the CallableCustom type. It is used when a Lua function is returned or pulled from Lua. In this case, a copy of the function is created and a reference to it is stored. The CallableCustom holds this reference ID and a reference to the Lua state, which enables the function to be called at a later time. By using LuaCallable, you can save a reference to a Lua function and call it whenever needed.
+The LuaCallable type extends the CallableCustom type. It is used when a Lua function is returned or pulled from Lua. In this case, a copy of the function is created and a reference to it is stored. The CallableCustom holds this reference ID and a reference to the Lua state, which enables the function to be called at a later time. By using LuaCallable, you can save a reference to a Lua function and call it whenever needed.
 
 ## Example
 ```gdscript
