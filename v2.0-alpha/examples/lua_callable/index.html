@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../../assets/sandcastle_icon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.c4a75a56.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.240905d7.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -591,6 +591,10 @@
 <h1 id="the-luacallable-type">The LuaCallable Type</h1>
 <h2 id="description">Description</h2>
 <p>The LuaCallable type extends the CallableCustom type. It is used when a Lua function is returned or pulled from Lua. In this case, a copy of the function is created and a reference to it is stored. The CallableCustom holds this reference ID and a reference to the Lua state, which enables the function to be called at a later time. By using LuaCallable, you can save a reference to a Lua function and call it whenever needed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to no support for the CallableCustom type in GDExtension. This type is not present in the GDExtension version of this addon.</p>
+</div>
 <h2 id="example">Example</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -675,7 +679,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.19047be9.min.js"></script>
       
     
   </body>
