@@ -1,15 +1,15 @@
 # Home
 
-## Godot LuaAPI V2.0-alpha
+## Godot LuaAPI V2.0-beta
 !!! warning
-    this is an **alpha** version of the module made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for godot v3.x.
+    this is an **beta** version of the addon made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for godot v3.x.
 
 <figure markdown>  
   ![Godot LuaAPI logo](./assets/luaapi_logo.png)
   <figcaption>Art created by <a href="https://www.instagram.com/redheadalex1" target="_blank">Alex</a></figcaption>
 </figure>
 
-This is a Godot engine module that adds Lua API support via GDScript. Importantly this is **NOT** meant to be a replacement for or alternative to GDScript. This module provides no functionality to program your game out of the box. This module allows you to create custom Modding API's in a sandboxed environment. You have control of what people can and can not do within that sandbox.
+This is a Godot engine addon that adds Lua API support via GDScript. Importantly this is **NOT** meant to be a replacement for or alternative to GDScript. This addon provides no functionality to program your game out of the box. This addon allows you to create custom Modding API's in a sandboxed environment. You have control of what people can and can not do within that sandbox.
 
 To use you can either [Compile from source](getting_started/installation#compiling-from-source) or you can download one of the [nightly builds](getting_started/installation#nightly-builds).
 
@@ -22,7 +22,7 @@ By default the Lua print function is set to print to the GDEditor console. This 
 - Call Lua functions from GDScript.
 - Choose which libraries you want Lua to have access to.
 - Custom LuaCallable type which allows you to get a Lua function as a Callable.
-- LuaError type which is used to report any errors this module or Lua run into.
+- LuaError type which is used to report any errors this addon or Lua run into.
 - LuaThread type which creates a Lua thread. This is not a OS thread but a coroutine.
 - Object passed as userdata.
 - Objects can override most of the Lua metamethods. I.E. \_\_index by defining a function with the same name.
