@@ -4,7 +4,7 @@
 A LuaError represents an error that happened in Lua.  
   
 !!! info
-  	Most functions in this addon return either a LuaError or null. 
+  	Most functions in this module return either a LuaError or null. 
 !!! tip
 	You may return a LuaError object from a GDScript function, called from Lua, in order to cause an error in Lua.
 ## Enumerations

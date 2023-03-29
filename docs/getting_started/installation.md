@@ -1,8 +1,8 @@
 # Installation
 
-The first thing you will need to do is obtain a copy of the editor built with this module. You can either compile from source yourself or download one of the nightly builds. Or you can download the GDExtension plugin.
+The first thing you will need to do is obtain a copy of the editor built with this module. You can either compile from source yourself or download one of the nightly builds.
+
 ## Nightly Builds
-- [⚙️ GDExtension](https://nightly.link/WeaselGames/godot_luaAPI/workflows/gdextension/main/godot_luaAPI.zip)
 - [🐧 Linux Editor](https://nightly.link/WeaselGames/godot_luaAPI/workflows/linux/main/linux-editor.zip)
 - [🐧 Linux Template](https://nightly.link/WeaselGames/godot_luaAPI/workflows/linux/main/linux-template-release.zip)
 - [🐧 Linux Template Debug](https://nightly.link/WeaselGames/godot_luaAPI/workflows/linux/main/linux-template-debug.zip)
