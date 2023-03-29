@@ -2,7 +2,7 @@
 
 ## Godot LuaAPI V2.0-beta
 !!! warning
-    this is an **beta** version of the addon made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for godot v3.x.
+    this is a **beta** version of the addon made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates. Please see the branch [v1.1-stable](https://github.com/WeaselGames/lua/tree/v1.1-stable) for godot v3.x.
 
 <figure markdown>  
   ![Godot LuaAPI logo](./assets/luaapi_logo.png)
