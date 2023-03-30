@@ -56,7 +56,7 @@ For some, the previous approach is still too limiting though. So we also allow y
 	You can learn more about all available metamethods in the official [Lua manual](https://www.lua.org/manual/5.3/manual.html#2.4).
 
 #### __index
-The __index metamethod is called when Lua tries to get a value from an object. This is the same as if you were using the `.` operator in Lua. Essentially, this is what the `lua_fields()` method is doing. However, you may want to do more than just return a value. You can also raise an error or return a custom value. 
+The __index metamethod is called when Lua tries to get a value from an object. This is the same as if you were using the `.` operator in Lua or the `[]` operator. Essentially, this is what the `lua_fields()` method is doing. However, you may want to do more than just return a value. You can also raise an error or return a custom value. 
 
 The __index method must take two arguments. The first is a reference to the [LuaAPI](../classes/lua_api.md) object. The second is the name of the field/method being requested. The method may return the value of the field/method or a [LuaError](../classes/lua_error.md) to raise an error.
 
