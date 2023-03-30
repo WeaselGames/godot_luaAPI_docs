@@ -14,9 +14,7 @@ This is a Godot engine addon that adds Lua API support via GDScript. Importantly
 To use you can either [Compile from source](getting_started/installation#compiling-from-source) or you can download one of the [nightly builds](getting_started/installation#nightly-builds).
 
 By default the Lua print function is set to print to the GDEditor console. This can be changed by exposing your own print function as it will overwrite the existing one.
-
 ## Features
-
 - Run Lua directly from a string or a text file.
 - Push any Variant as a global.
 - Call Lua functions from GDScript.
@@ -28,5 +26,4 @@ By default the Lua print function is set to print to the GDEditor console. This 
 - Objects can override most of the Lua metamethods. I.E. \_\_index by defining a function with the same name.
 - Callables passed as userdata, which allows you to push a Callable as a Lua function.
 - Basic types are passed as userdata (currently: Vector2, Vector3, Color, Rect2, Plane) with a useful metatable.
-
 If a feature is missing that you would like to see feel free to create a [Feature Request](https://github.com/WeaselGames/lua/issues/new?assignees=&labels=feature%20request&template=feature_request.md&title=) or submit a PR.

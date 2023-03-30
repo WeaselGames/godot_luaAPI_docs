@@ -58,7 +58,7 @@ I was invoked by <LuaAPI#-9223372010447437397>
 
 ### with_tuple _LuaCallableExtra_ {#with_tuple}
 
-Static method that creates a LuaCallableExtra. A reference to the [LuaAPI](lua_api.md) object that invoked the method will be passed as an argument to the callable. By specifying the number of expected arguments in this function, the addon will be able to add all, if any, extra arguments to a [LuaTuple](lua_tuple.md), which will always be the last parameter.
+Static method that creates a LuaCallableExtra. A reference to the [LuaAPI](lua_api.md) object that invoked the method will be passed as an argument to the callable. By specifying the number of expected arguments in this function, the module will be able to add all, if any, extra arguments to a [LuaTuple](lua_tuple.md), which will always be the last parameter.
 
 #### Parameters
 
@@ -82,7 +82,7 @@ func _ready():
 	lua = LuaAPI.new()
 	lua.push_variant(
 		"somator",
-		LuaCallableExtra.with_tuple(my_somator_function, 0)
+		LuaCallableExtra.with_tuple(my_somator_function, 1)
 	)
 	lua.do_string("somator(1, 2, 3, 4)")
 	
@@ -101,7 +101,7 @@ func my_somator_function(args: LuaTuple):
 
 ### with_ref_and_tuple _LuaCallableExtra_ {#with_ref_and_tuple}
 
-Static method that creates a LuaCallableExtra. By specifying the number of expected arguments in this function, the addon will be able to add all, if any, extra arguments to a [LuaTuple](lua_tuple.md), which will always be the last parameter.
+Static method that creates a LuaCallableExtra. By specifying the number of expected arguments in this function, the module will be able to add all, if any, extra arguments to a [LuaTuple](lua_tuple.md), which will always be the last parameter.
 
 !!! note
 	This method is similar to [with_ref](#with_ref) and [with_tuple](#with_tuple) combined.
