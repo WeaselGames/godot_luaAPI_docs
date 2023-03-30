@@ -15,7 +15,7 @@
         <link rel="next" href="../lua_callable/">
       
       <link rel="icon" href="../../assets/sandcastle_icon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.402914a4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.240905d7.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -465,9 +465,60 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Working with Objects in Lua
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Working with Objects in Lua
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-access-to-fields-and-methods" class="md-nav__link">
+    Controlling access to fields and methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Controlling access to fields and methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lua_fields" class="md-nav__link">
+    lua_fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-metamethods" class="md-nav__link">
+    Overriding metamethods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -514,6 +565,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-access-to-fields-and-methods" class="md-nav__link">
+    Controlling access to fields and methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Controlling access to fields and methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lua_fields" class="md-nav__link">
+    lua_fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-metamethods" class="md-nav__link">
+    Overriding metamethods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -531,80 +617,199 @@
 
 
 <h1 id="working-with-objects-in-lua">Working with Objects in Lua</h1>
-<p>Normally when using <code>push_variant()</code> or the return value of a GDScript function that Lua calls. The value is copied to Lua. However, types that inherit from Objects work a bit differently. Objects will be pushed to Lua as <a href="https://www.lua.org/pil/28.1.html">UserData</a>. This means they are passed by reference to or from Lua. </p>
-<p>In order to call functions and get values from the object we assign the mt_Object metatable to it. This is a custom meta table we defined for Objects. This allows for methods to be called on the object, values to be get/set on the Object and much more.</p>
-<p>By default every field and method is available to Lua. You can limit what Lua has access to be defining either the <code>lua_fields()</code> method. Which must return an Array of string names for the allowed fields/methods. You can also use the <code>__index()</code> method. Which takes reference to the <a href="../../classes/lua_api/">LuaAPI</a> and a string of the field being requested by Lua. If you would like to allow the field, simply return the value. You may also return a <a href="../../classes/lua_error/">LuaError</a> to raise a error on the Lua state.</p>
-<p>Below is a example of passing a Object to Lua:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="c1"># If lua_fields is not defined or returns a empty array, all functions and fields will be aval.</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">lua_fields</span><span class="p">():</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;move_forward&quot;</span><span class="p">]</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="o">+=</span><span class="mi">1</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">var</span><span class="w"> </span><span class="n">player2</span><span class="p">:</span><span class="w"> </span><span class="n">Player</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="n">player2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Player</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;getPlayer2&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">func</span><span class="p">():</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">player2</span><span class="p">)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="s2">    player = Player()</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="s2">    player.move_forward()</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="s2">    print(player.pos.x)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="s2">    player2 = getPlayer2()</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="s2">    player2.pos = Vector2(50, 1)</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="s2">    print(player2.pos)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player2</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-</code></pre></div></p>
-<p>For some this is still too limiting though. So we also allow you to override almost any metamethod on the object. Here is a example of that:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="c1"># Most metamethods can be overriden. The function names are the same as the metamethods.</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">__index</span><span class="p">(</span><span class="n">ref</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">):</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">index</span><span class="o">==</span><span class="s2">&quot;pos&quot;</span><span class="p">:</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">pos</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">new_error</span><span class="p">(</span><span class="s2">&quot;Invalid index &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">index</span><span class="p">)</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="o">+=</span><span class="mi">1</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="s2">    player = Player()</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="s2">    print(player.pos.x)</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="s2">    player.move_forward() -- This will cause our custom error</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-</code></pre></div></p>
+<p>Normally, when using <code>push_variant()</code> or the return value of a GDScript function that Lua calls, the value is copied to Lua. However, types that inherit from <a href="https://docs.godotengine.org/en/stable/classes/class_object.html">Object</a> work a bit differently. Objects will be pushed to Lua as <a href="https://www.lua.org/pil/28.1.html">UserData</a>. This means they are passed by reference to or from Lua.</p>
+<h2 id="controlling-access-to-fields-and-methods">Controlling access to fields and methods</h2>
+<div class="admonition info">
+<p class="admonition-title">In the background...</p>
+<p>In order to call functions and get values from the object we assign the mt_Object metatable to it. This is a custom metatable we defined for Objects. This allows for methods to be called on the object, values to be get/set on the Object and much more.</p>
+</div>
+<h3 id="lua_fields">lua_fields</h3>
+<p>By default every field and method is available to Lua. You can limit what Lua has access to by defining either the <code>lua_fields()</code> method, which must return an Array of the names of allowed fields/methods, or by defining the <code>__index()</code> method, which takes reference to the <a href="../../classes/lua_api/">LuaAPI</a> and a string of the field being requested by Lua. If you would like to allow the field, add it's name to the array and return it.</p>
+<p>Below is an example of passing a Object to Lua:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="c1"># If lua_fields is not defined or returns a empty array, all functions and fields will be available.</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">lua_fields</span><span class="p">():</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;move_forward&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">var</span><span class="w"> </span><span class="n">player2</span><span class="p">:</span><span class="w"> </span><span class="n">Player</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">    </span><span class="n">player2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Player</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;getPlayer2&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">func</span><span class="p">():</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">player2</span><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="s2">    player = Player()</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="s2">    player.move_forward()</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="s2">    print(player.pos.x)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="s2">    player2 = getPlayer2()</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="s2">    player2.pos = Vector2(50, 1)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="s2">    print(player2.pos)</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player2</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="overriding-metamethods">Overriding metamethods</h3>
+<p>For some, the previous approach is still too limiting though. So we also allow you to override almost any metamethod on the object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The first argument passed to the metamethod is always reference to the <a href="../../classes/lua_api/">LuaAPI</a> object. Besides that the arguments will be the same as if you were using it in Lua.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can learn more about all available metamethods in the official <a href="https://www.lua.org/manual/5.3/manual.html#2.4">Lua manual</a>.</p>
+</div>
+<h4 id="__index">__index</h4>
+<p>The __index metamethod is called when Lua tries to get a value from an object. This is the same as if you were using the <code>.</code> operator in Lua or the <code>[]</code> operator. Essentially, this is what the <code>lua_fields()</code> method is doing. However, you may want to do more than just return a value. You can also raise an error or return a custom value. </p>
+<p>The __index method must take two arguments. The first is a reference to the <a href="../../classes/lua_api/">LuaAPI</a> object. The second is the name of the field/method being requested. The method may return the value of the field/method or a <a href="../../classes/lua_error/">LuaError</a> to raise an error.</p>
+<p>Here is a example of that:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="c1"># Most metamethods can be overridden. The function names are the same as the metamethods.</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">__index</span><span class="p">(</span><span class="n">ref</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">):</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">index</span><span class="o">==</span><span class="s2">&quot;pos&quot;</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">pos</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">new_error</span><span class="p">(</span><span class="s2">&quot;Invalid index &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="s2">    player = Player()</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="s2">    print(player.pos.x)</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="s2">    player.move_forward() -- This will cause our custom error</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<hr />
+<h4 id="__newindex">__newindex</h4>
+<p>The __newindex metamethod is called when Lua tries to set a value on an object. This is the same as if you were using the <code>=</code> operator in Lua. Essentially, this is what the <code>lua_fields()</code> method is doing. However, you may want to do more than just set a value. You can also raise an error or set a custom value.</p>
+<p>The __newindex method must take three arguments. The first is a reference to the <a href="../../classes/lua_api/">LuaAPI</a> object. The second is the name of the field/method being set. The third is the value being set. The method may a <a href="../../classes/lua_error/">LuaError</a> to raise an error.</p>
+<p>Here is a example of that:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">class</span><span class="w"> </span><span class="n">Player</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">Vector2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="c1"># Most metamethods can be overridden. The function names are the same as the metamethods.</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">__newindex</span><span class="p">(</span><span class="n">ref</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">):</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">index</span><span class="o">==</span><span class="s2">&quot;pos&quot;</span><span class="p">:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">new_error</span><span class="p">(</span><span class="s2">&quot;Invalid index &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="k">func</span><span class="w"> </span><span class="n">move_forward</span><span class="p">():</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">expose_constructor</span><span class="p">(</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Player</span><span class="p">)</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s2">    player = Player()</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="s2">    player.pos = Vector2(50, 1)</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="s2">    print(player.pos)</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="s2">    player.move_forward = 5 -- This will cause our custom error</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
 
 
 
@@ -617,10 +822,10 @@
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
-          </a>
+          </button>
         
       </main>
       
@@ -688,7 +893,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ce72ebac.min.js"></script>
+      <script src="../../assets/javascripts/bundle.19047be9.min.js"></script>
       
     
   </body>
