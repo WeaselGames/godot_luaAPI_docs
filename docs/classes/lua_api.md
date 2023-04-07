@@ -312,3 +312,13 @@ func _ready():
 ``` title="Output"
 Hello Lua!
 ```
+
+---
+
+### new_coroutine *[LuaCoroutine](lua_coroutine.md)* {#do_file}
+
+ Creates and binds a LuaCoroutine object to a LuaAPI object. This method is equivalent to creating a new coroutine object and then calling its [bind](#bind) method.
+
+#### Returns
+
+*[LuaCoroutine](lua_coroutine.md)*

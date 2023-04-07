@@ -27,7 +27,7 @@ nav:
       - getting_started/installation.md
   - Classes:
       - classes/lua_api.md
-      - classes/lua_thread.md
+      - classes/lua_coroutine.md
       - classes/lua_error.md
       - classes/lua_callable_extra.md
       - classes/lua_tuple.md
