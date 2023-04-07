@@ -1,34 +1,18 @@
-# LuaThread
+# LuaCoroutine
 
 ## Description
-The confusingly named LuaThread class is used to create and manage Lua coroutines, not OS threads. Lua coroutines bound to the same Lua object share the same global variables.
+The confusingly named LuaCoroutine class is used to create and manage Lua coroutines. Lua coroutines bound to the same Lua object share the same global table.
   
 In contrast to the [LuaAPI](lua_api.md) class, any file or string you load into the state will not be immediately executed. Everytime the [resume](#resume) method is called, the Lua code will execute until its end is reached or until `yield` is called from Lua.  
   
 
-Lua code running inside a LuaThread has access to the `yield` function which can accept and return any number of arguments to GDScript through the [resume](#resume) function of the thread. Typically, you will use this function to pause the Lua code for as long as the user specifies in its arguments (see the [example](#example) below).
+Lua code running inside a LuaCoroutine has access to the `yield` function which can accept and return any number of arguments to GDScript through the [resume](#resume) function of the coroutine. Typically, you will use this function to pause the Lua code for as long as the user specifies in its arguments (see the [example](#example) below).
 
 ## Methods
 
-### new_thread _LuaThread_ {#new_thread}
-
-Static method that creates and binds a LuaThread object to a LuaAPI object. This method is equivalent to creating a new thread object and then calling its [bind](#bind) method.
-
-#### Parameters
-
-| Parameters | Description |
-| --- | --- |
-| lua: [`LuaAPI`](lua_api.md) | The LuaAPI object to bind to. |
-
-#### Returns
-
-_LuaThread_
-
----
-
 ### bind _void_ {#bind}
 
-Binds the thread to a LuaAPI object. All threads attached to the same object share the same resources.
+Binds the coroutine to a LuaAPI object. All coroutines attached to the same object share the same resources.
 
 #### Parameters
 
@@ -44,7 +28,7 @@ _void_
 
 ### load_file _[LuaError](lua_error.md)?_ {#load_file}
 
-Loads a file by its **absolute path** into the thread's state.
+Loads a file by its **absolute path** into the coroutine's state.
 
 !!! warning
 	This method simply loads the contents of the file into the Lua state. It does **not** execute it.  
@@ -87,7 +71,7 @@ _void_
 
 ### resume _Variant_ {#resume}
 
-Resumes or starts the thread. Will either return an Array of arguments passed by Lua through the yield() function or a [LuaError](lua_error.md).
+Resumes or starts the coroutine. Will either return an Array of arguments passed by Lua through the yield() function or a [LuaError](lua_error.md).
 
 #### Parameters
 
@@ -101,7 +85,7 @@ _Variant_
 
 ### is_done _bool_ {#is_done}
 
-Returns `#!gdscript true` if the thread has finished executing.
+Returns `#!gdscript true` if the coroutine has finished executing.
 
 #### Parameters
 
@@ -139,16 +123,16 @@ _Variant_
 extends Node2D
 
 var lua: LuaAPI
-var thread: LuaThread
+var coroutine: LuaCoroutine
 
 func _ready():
 	lua = LuaAPI.new()
 	lua.bind_libraries(["base"])
-	thread = LuaThread.new_thread(lua)
-	thread.load_file("user://file.lua")
-	thread.resume()
+	coroutine = lua.new_coroutine()
+	coroutine.load_file("user://file.lua")
+	coroutine.resume()
 	# Call the "test" Lua function with "Val1", 2 and true as arguments.
-	thread.call_function("test", ["Val1", 2, true])
+	coroutine.call_function("test", ["Val1", 2, true])
 ```
 
 ??? example "Example: user://file.lua"
@@ -160,64 +144,6 @@ func _ready():
 	``` title="Output"
 	I got Val1, 2, true
 	```
-
----
-
-### expose_constructor *[LuaError](lua_error.md)?* {#expose_constructor}
-
-!!! note
-	This method is identical to [LuaAPI](lua_api.md)'s method with the same name.
-
-Exposes the constructor of a class to Lua as a global method.
-
-#### Parameters
-
-| Parameters                | Description                         |
-| ------------------------- | ----------------------------------- |
-| constructorName: `String` | The name of the constructor in Lua. |
-| gdscriptClass: `Object`   | A GDScript class or any Object that can be created with the `.new` method.                   |
-
-
-#### Returns
-
-*[LuaError](lua_error.md)* or `#!gdscript null` depending on whether there is an error or not.
-
-#### Examples
-
-```gdscript linenums="1"
-extends Node2D
-var lua: LuaAPI
-var thread: LuaThread
-
-class Player:
-	var pos = Vector2(0, 0)
-	# If lua_funcs is not defined or returns an empty array, all class methods will be available in Lua.
-	func lua_funcs():
-		return ["move_forward"]
-	# lua_fields behaves similarly to lua_funcs but for fields.
-	func lua_fields():
-		return ["pos"]
-
-	func move_forward():
-		pos.x += 1
-
-func _ready():
-	lua = LuaAPI.new()
-	thread = LuaThread.new_thread(lua)
-	thread.expose_constructor("Player", Player)
-	thread.load_string("player = Player() player.move_forward() print(player.pos.x)")
-	thread.resume()
-	var player = lua.pull_variant("player")
-	print(player.pos)
-```
-
-The string passed to `thread.load_string` is the following Lua code:
-
-```lua
-player = Player()
-player.move_forward()
-print(player.pos.x)
-```
 
 ---
 
@@ -244,16 +170,16 @@ _bool_
 extends Node2D
 
 var lua: LuaAPI
-var thread: LuaThread
+var coroutine: LuaCoroutine
 
 func _ready():
 	lua = LuaAPI.new()
-	thread = LuaThread.new_thread(lua)
-	thread.load_file("user://file.lua")
-	thread.resume()
+	coroutine = lua.new_coroutine()
+	coroutine.load_file("user://file.lua")
+	coroutine.resume()
 
 	# Check if the "test" Lua function is defined.
-	if(thread.function_exists("test")):
+	if(coroutine.function_exists("test")):
 		print("yes")
 	else:
 		print("no")
@@ -295,16 +221,16 @@ _Variant_
 extends Node2D
 
 var lua: LuaAPI
-var thread: LuaThread
+var coroutine: LuaCoroutine
 
 func _ready():
 	lua = LuaAPI.new()
-	thread = LuaThread.new_thread(lua)
-	thread.load_string("myNumber = 10")
-	thread.resume()
+	coroutine = lua.new_coroutine()
+	coroutine.load_string("myNumber = 10")
+	coroutine.resume()
 
 	# Read the value of myNumber.
-	var my_number = thread.pull_variant("myNumber")
+	var my_number = coroutine.pull_variant("myNumber")
 	print(my_number)
 ```
 ``` title="Output"
@@ -338,15 +264,15 @@ Pushes a copy of a variant (`value`) to the Lua stack as the global variable `va
 extends Node2D
 
 var lua: LuaAPI
-var thread: LuaThread
+var coroutine: LuaCoroutine
 var test = "Hello Lua!"
 
 func _ready():
 	lua = LuaAPI.new()
-	thread = LuaThread.new_thread(lua)
-	thread.push_variant("str", test)
-	thread.load_string("print(str)")
-	thread.resume()
+	coroutine = lua.new_coroutine()
+	coroutine.push_variant("str", test)
+	coroutine.load_string("print(str)")
+	coroutine.resume()
 ```
 ``` title="Output"
 Hello Lua!
@@ -360,15 +286,15 @@ Hello Lua!
 extends Node2D
 
 var lua: LuaAPI
-var thread: LuaThread
+var coroutine: LuaCoroutine
 	
 func _ready():
 	lua = LuaAPI.new()
-	# Despite the name, this is not like a OS thread. It is a coroutine.
-	thread = LuaThread.new_thread(lua)
-	thread.load_string("
+	# Despite the name, this is not like a OS coroutine. It is a coroutine.
+	coroutine = lua.new_coroutine()
+	coroutine.load_string("
 	while true do
-		-- yield is exposed to Lua when the thread is bound.
+		-- yield is exposed to Lua when the coroutine is bound.
 		yield(1)
 		print('Hello world!')
 	end
@@ -378,15 +304,15 @@ var yieldTime = 0
 var timeSince = 0
 func _process(delta):
 	timeSince += delta
-	# If the thread has finished executing or if not enough time has passed, do not resume the thread.
-	if thread.is_done() || timeSince <= yieldTime:
+	# If the coroutine has finished executing or if not enough time has passed, do not resume the coroutine.
+	if coroutine.is_done() || timeSince <= yieldTime:
 		return
-	# thread.resume will either return a LuaError or an Array.
-	var ret = thread.resume()
+	# coroutine.resume will either return a LuaError or an Array.
+	var ret = coroutine.resume()
 	if ret is LuaError:
 		print("ERROR %d: " % ret.type + ret.msg)
 		return
-	# Assumes the user will always pass the number of seconds to pause the thread for.
+	# Assumes the user will always pass the number of seconds to pause the coroutine for.
 	yieldTime = ret[0]
 	timeSince = 0
 ```
