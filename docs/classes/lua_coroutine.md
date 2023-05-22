@@ -1,7 +1,7 @@
 # LuaCoroutine
 
 ## Description
-The confusingly named LuaCoroutine class is used to create and manage Lua coroutines. Lua coroutines bound to the same Lua object share the same global table.
+The LuaCoroutine class is used to create and manage Lua coroutines. Lua coroutines bound to the same Lua object share the same global table.
   
 In contrast to the [LuaAPI](lua_api.md) class, any file or string you load into the state will not be immediately executed. Everytime the [resume](#resume) method is called, the Lua code will execute until its end is reached or until `yield` is called from Lua.  
   
@@ -94,6 +94,69 @@ None
 #### Returns
 
 _bool_
+
+---
+### yield_await *Signal* {#yield_await}
+
+!!! warning
+	This method is still experimental and may cause issues.
+
+This method attempts to allow you to hault execution in a GDScript method called by a lua coroutine.
+It takes an array as an argument, which is then passed to `LuaCoroutine.resume()`.
+
+#### Parameters
+
+| Parameters                | Description                                          |
+| ------------------------- | ---------------------------------------------------- |
+| args: `Array`             | Array of arguments to be passed to LuaCoroutine.resume(). |
+
+#### Returns
+
+_Signal_
+
+#### Example
+
+```gdscript linenums="1"
+extends Node2D
+
+var lua: LuaAPI
+var coroutine: LuaCoroutine
+
+func wait_for_object():
+    print("before")
+    await coroutine.yield_await([get_tree().create_timer(3).timeout])
+    print("after")
+    return 1
+
+func _ready():
+    lua = LuaAPI.new()
+    coroutine = lua.new_coroutine()
+    coroutine.push_variant("WaitForObjectAsync", wait_for_object)
+    coroutine.load_string("""
+    print(WaitForObjectAsync())
+    """)
+
+var yieldTime = 0
+var timeSince = 0
+func _process(delta):
+    timeSince += delta.
+    if coroutine.is_done() || timeSince <= yieldTime:
+        return
+    var ret = coroutine.resume()
+    if ret is LuaError:
+        print("ERROR %d: " % ret.type + ret.msg)
+        return
+    if ret:
+        if ret[0] is Signal:
+            set_process(false)
+            await ret[0]
+            yieldTime = 0
+            timeSince = 1
+            set_process(true)
+            return
+        yieldTime = ret[0]
+        timeSince = 0
+```
 
 ---
 
