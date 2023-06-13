@@ -460,8 +460,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#do_file" class="md-nav__link">
-    set_hook LuaCoroutine
+  <a href="#set_hook" class="md-nav__link">
+    set_hook void
   </a>
   
 </li>
@@ -784,8 +784,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#do_file" class="md-nav__link">
-    set_hook LuaCoroutine
+  <a href="#set_hook" class="md-nav__link">
+    set_hook void
   </a>
   
 </li>
@@ -1229,8 +1229,8 @@
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Hello Lua!
 </code></pre></div></p>
 <hr />
-<h3 id="do_file">set_hook <em><a href="../lua_coroutine/">LuaCoroutine</a></em></h3>
-<p>Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: [code]hook(parent, event, line)[/code]. The parent is the LuaAPI object that owns the current state.</p>
+<h3 id="set_hook">set_hook <em>void</em></h3>
+<p>Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: <code>hook(parent, event, line)</code>. The parent is the LuaAPI object that owns the current state.</p>
 <p>This is useful for preventing infinite loops, but it should be kept in mind there will be a large performance tax.</p>
 <h4 id="parameters_8">Parameters</h4>
 <table>
