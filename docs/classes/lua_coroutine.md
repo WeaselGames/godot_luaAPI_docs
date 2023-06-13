@@ -401,9 +401,9 @@ func _process(delta):
 
 ---
 
-### set_hook *[LuaCoroutine](lua_coroutine.md)* {#do_file}
+### set_hook _void_ {#set_hook}
 
-Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: [code]hook(parent, event, line)[/code]. The parent is the LuaAPI object that owns the current state.
+Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: `hook(parent, event, line)`. The parent is the LuaAPI object that owns the current state.
 
 This is useful for preventing infinite loops, but it should be kept in mind there will be a large performance tax.
 
