@@ -315,9 +315,105 @@ Hello Lua!
 
 ---
 
-### new_coroutine *[LuaCoroutine](lua_coroutine.md)* {#do_file}
+### set_hook *[LuaCoroutine](lua_coroutine.md)* {#do_file}
 
- Creates and binds a LuaCoroutine object to a LuaAPI object. This method is equivalent to creating a new coroutine object and then calling its [bind](#bind) method.
+Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: [code]hook(parent, event, line)[/code]. The parent is the LuaAPI object that owns the current state.
+
+This is useful for preventing infinite loops, but it should be kept in mind there will be a large performance tax.
+
+#### Parameters
+
+| Parameters             | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| hook: `Callable`       | The function to be called as a hook.                                |
+| mask: `int`            | The hook even mask.                                                 |
+| count: `int`           | Specifies how many instructions should be executed before the hook. |
+
+#### Returns
+
+_void_
+
+#### Example
+
+```gdscript linenums="1"
+extends Node2D
+
+var lua: LuaAPI
+var coroutine: LuaCoroutine
+
+func _lua_hook(lua: LuaAPI, event: int, line: int):
+	var co: LuaCoroutine = lua.get_running_coroutine()
+	co.yield_state([1])
+
+func _ready():
+	lua = LuaAPI.new()
+	# Despite the name, this is not like a OS coroutine. It is a coroutine.
+	coroutine = lua.new_coroutine()
+	coroutine.set_hook(_lua_hook, lua.HOOK_MASK_COUNT, 8)
+	coroutine.load_string("
+	for i=1,2,1 do
+		print('Hello world!')
+	end
+	")
+
+var yieldTime = 0
+var timeSince = 0
+var goodBye = false
+func _process(delta):
+	
+	timeSince += delta
+	# If the coroutine has finished executing or if not enough time has passed, do not resume the coroutine.
+	if coroutine.is_done() || timeSince <= yieldTime:
+		if !goodBye:
+			lua.do_string("""
+			for i = 0,4,1 do 
+				print('Good Bye World!')
+			end
+			""")
+			goodBye=true
+		return
+	goodBye=false
+	# coroutine.resume will either return a LuaError or an Array.
+	var ret = coroutine.resume()
+	if ret is LuaError:
+		print("ERROR %d: " % ret.type + ret.message)
+		return
+	if coroutine.is_done():
+		return
+	
+	yieldTime = ret[0]
+	timeSince = 0
+```
+``` title="Output"
+Hello world!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+Hello world!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+Good Bye World!
+```
+
+---
+
+### new_coroutine *[LuaCoroutine](lua_coroutine.md)* {#new_coroutine}
+
+Creates and binds a LuaCoroutine object to a LuaAPI object. This method is equivalent to creating a new coroutine object and then calling its [bind](#bind) method.
+
+#### Returns
+
+*[LuaCoroutine](lua_coroutine.md)*
+
+---
+
+### get_running_coroutine *[LuaCoroutine](lua_coroutine.md)* {#do_file}
+
+Intended to be called from a lua hook. Returns the current running coroutine.
 
 #### Returns
 

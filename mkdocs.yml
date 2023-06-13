@@ -34,6 +34,9 @@ nav:
   - Examples:
       - examples/objects.md
       - examples/lua_callable.md
+  - Contributing:
+      - contributing/ways_to_contribute.md
+      - contributing/development_environment.md
 
 theme:
   name: material

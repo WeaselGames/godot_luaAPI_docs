@@ -182,5 +182,4 @@ func custom_print_function(lua_object: LuaAPI, args: LuaTuple):
 	print(args.to_array(), " -- ", lua_object)
 ```
 
-
 ---
