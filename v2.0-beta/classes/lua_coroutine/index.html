@@ -460,6 +460,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#yield_state" class="md-nav__link">
+    yield_state LuaError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#call_function" class="md-nav__link">
     call_function Variant
   </a>
@@ -496,6 +503,19 @@
   <a href="#example_5" class="md-nav__link">
     Example
   </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do_file" class="md-nav__link">
+    set_hook LuaCoroutine
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -621,6 +641,71 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Contributing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ways_to_contribute/" class="md-nav__link">
+        Ways to contribute
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/development_environment/" class="md-nav__link">
+        Development Environment
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -705,6 +790,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#yield_state" class="md-nav__link">
+    yield_state LuaError
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#call_function" class="md-nav__link">
     call_function Variant
   </a>
@@ -741,6 +833,19 @@
   <a href="#example_5" class="md-nav__link">
     Example
   </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do_file" class="md-nav__link">
+    set_hook LuaCoroutine
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -960,6 +1065,30 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="w">        </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div></td></tr></table></div>
 <hr />
+<h3 id="yield_state">yield_state <em><a href="../lua_error/">LuaError</a></em></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This method is still experimental and may cause issues.</p>
+</div>
+<h4 id="parameters_6">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>args: <code>Array</code></td>
+<td>Arguments to be passed to <a href="#resume">resume</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>Must be called from a lua hook. Will yield the lua state and pass arguments to <a href="#resume">resume</a>. Can be destructive.</p>
+<h4 id="returns_6">Returns</h4>
+<p><em><a href="../lua_error/">LuaError</a></em></p>
+<hr />
 <h3 id="call_function">call_function <em>Variant</em></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -967,7 +1096,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 </div>
 <p>Calls a global Lua function from GDscript.  </p>
 <p>You can pass any number of arguments to the Lua function by adding them to the array parameter.</p>
-<h4 id="parameters_6">Parameters</h4>
+<h4 id="parameters_7">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -986,7 +1115,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 </tr>
 </tbody>
 </table>
-<h4 id="returns_6">Returns</h4>
+<h4 id="returns_7">Returns</h4>
 <p><em>Variant</em></p>
 <h4 id="example_1">Example</h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
@@ -1031,7 +1160,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
 </div>
 <p>Returns <code class="highlight"><span class="bp">true</span></code> if there is a Lua function with the provided name.</p>
-<h4 id="parameters_7">Parameters</h4>
+<h4 id="parameters_8">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -1046,7 +1175,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 </tr>
 </tbody>
 </table>
-<h4 id="returns_7">Returns</h4>
+<h4 id="returns_8">Returns</h4>
 <p><em>bool</em></p>
 <h4 id="example_2">Example</h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
@@ -1098,7 +1227,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
 </div>
 <p>Reads the value of a variable by its name from the Lua state.</p>
-<h4 id="parameters_8">Parameters</h4>
+<h4 id="parameters_9">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -1113,7 +1242,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 </tr>
 </tbody>
 </table>
-<h4 id="returns_8">Returns</h4>
+<h4 id="returns_9">Returns</h4>
 <p><em>Variant</em></p>
 <h4 id="example_3">Example</h4>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
@@ -1153,7 +1282,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <p>This method is identical to <a href="../lua_api/">LuaAPI</a>'s method with the same name.</p>
 </div>
 <p>Pushes a copy of a variant (<code>value</code>) to the Lua stack as the global variable <code>variableName</code>.</p>
-<h4 id="parameters_9">Parameters</h4>
+<h4 id="parameters_10">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -1172,7 +1301,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 </tr>
 </tbody>
 </table>
-<h4 id="returns_9">Returns</h4>
+<h4 id="returns_10">Returns</h4>
 <p><em><a href="../lua_error/">LuaError</a></em> or <code class="highlight"><span class="nb nb-Type">null</span></code> depending on whether there is an error or not.</p>
 <h4 id="example_4">Example</h4>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
@@ -1267,6 +1396,144 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">    </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="do_file">set_hook <em><a href="./">LuaCoroutine</a></em></h3>
+<p>Sets the hook for the state. The hook will be called on the events specified by the mask. The count specifies how many instructions should be executed before the hook is called. If count is 0, the hook will be called on every instruction. The hook will be called with the following arguments: [code]hook(parent, event, line)[/code]. The parent is the LuaAPI object that owns the current state.</p>
+<p>This is useful for preventing infinite loops, but it should be kept in mind there will be a large performance tax.</p>
+<h4 id="parameters_11">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hook: <code>Callable</code></td>
+<td>The function to be called as a hook.</td>
+</tr>
+<tr>
+<td>mask: <code>int</code></td>
+<td>The hook even mask.</td>
+</tr>
+<tr>
+<td>count: <code>int</code></td>
+<td>Specifies how many instructions should be executed before the hook.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_11">Returns</h4>
+<p><em>void</em></p>
+<h4 id="example_6">Example</h4>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span>
+<span class="normal"><a href="#__codelineno-12-38">38</a></span>
+<span class="normal"><a href="#__codelineno-12-39">39</a></span>
+<span class="normal"><a href="#__codelineno-12-40">40</a></span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span>
+<span class="normal"><a href="#__codelineno-12-45">45</a></span>
+<span class="normal"><a href="#__codelineno-12-46">46</a></span>
+<span class="normal"><a href="#__codelineno-12-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">extends</span><span class="w"> </span><span class="n">Node2D</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">var</span><span class="w"> </span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="k">var</span><span class="w"> </span><span class="n">coroutine</span><span class="p">:</span><span class="w"> </span><span class="n">LuaCoroutine</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="k">func</span><span class="w"> </span><span class="n">_lua_hook</span><span class="p">(</span><span class="n">lua</span><span class="p">:</span><span class="w"> </span><span class="n">LuaAPI</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">):</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">co</span><span class="p">:</span><span class="w"> </span><span class="n">LuaCoroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">get_running_coroutine</span><span class="p">()</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">co</span><span class="o">.</span><span class="n">yield_state</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="c1"># Despite the name, this is not like a OS coroutine. It is a coroutine.</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="n">coroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">new_coroutine</span><span class="p">()</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">set_hook</span><span class="p">(</span><span class="n">_lua_hook</span><span class="p">,</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">HOOK_MASK_COUNT</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="w"> </span><span class="n">do</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="n">end</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span><span class="s2">&quot;)</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="k">var</span><span class="w"> </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="k">var</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="k">var</span><span class="w"> </span><span class="n">goodBye</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">false</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="k">func</span><span class="w"> </span><span class="n">_process</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">    </span><span class="c1"># If the coroutine has finished executing or if not enough time has passed, do not resume the coroutine.</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">is_done</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">yieldTime</span><span class="p">:</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">goodBye</span><span class="p">:</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">            </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="s2">            for i = 0,4,1 do </span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="s2">                print(&#39;Good Bye World!&#39;)</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="s2">            end</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">            </span><span class="n">goodBye</span><span class="o">=</span><span class="bp">true</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">        </span><span class="k">return</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">    </span><span class="n">goodBye</span><span class="o">=</span><span class="bp">false</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">    </span><span class="c1"># coroutine.resume will either return a LuaError or an Array.</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
+<a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="w">        </span><span class="k">return</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">is_done</span><span class="p">():</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="w">        </span><span class="k">return</span>
+<a id="__codelineno-12-45" name="__codelineno-12-45"></a>
+<a id="__codelineno-12-46" name="__codelineno-12-46"></a><span class="w">    </span><span class="n">yieldTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Hello world!
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Good Bye World!
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Good Bye World!
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Good Bye World!
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>Good Bye World!
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>Good Bye World!
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>Hello world!
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>Good Bye World!
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>Good Bye World!
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>Good Bye World!
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>Good Bye World!
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>Good Bye World!
+</code></pre></div></p>
+<hr />
 
 
 
