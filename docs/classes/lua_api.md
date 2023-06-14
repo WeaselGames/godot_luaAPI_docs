@@ -360,7 +360,6 @@ var yieldTime = 0
 var timeSince = 0
 var goodBye = false
 func _process(delta):
-	
 	timeSince += delta
 	# If the coroutine has finished executing or if not enough time has passed, do not resume the coroutine.
 	if coroutine.is_done() || timeSince <= yieldTime:
@@ -374,7 +373,7 @@ func _process(delta):
 		return
 	goodBye=false
 	# coroutine.resume will either return a LuaError or an Array.
-	var ret = coroutine.resume()
+	var ret = coroutine.resume([])
 	if ret is LuaError:
 		print("ERROR %d: " % ret.type + ret.message)
 		return

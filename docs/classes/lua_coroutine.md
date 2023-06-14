@@ -75,7 +75,9 @@ Resumes or starts the coroutine. Will either return an Array of arguments passed
 
 #### Parameters
 
-None
+| Parameters | Description |
+| --- | --- |
+| args: `Array` | A array of arguments to be passed to yield() in lua (Or await in gdscript if yield_await was used). |
 
 #### Returns
 
@@ -142,7 +144,7 @@ func _process(delta):
     timeSince += delta.
     if coroutine.is_done() || timeSince <= yieldTime:
         return
-    var ret = coroutine.resume()
+    var ret = coroutine.resume([])
     if ret is LuaError:
         print("ERROR %d: " % ret.type + ret.msg)
         return
@@ -212,7 +214,7 @@ func _ready():
 	lua.bind_libraries(["base"])
 	coroutine = lua.new_coroutine()
 	coroutine.load_file("user://file.lua")
-	coroutine.resume()
+	coroutine.resume([])
 	# Call the "test" Lua function with "Val1", 2 and true as arguments.
 	coroutine.call_function("test", ["Val1", 2, true])
 ```
@@ -258,7 +260,7 @@ func _ready():
 	lua = LuaAPI.new()
 	coroutine = lua.new_coroutine()
 	coroutine.load_file("user://file.lua")
-	coroutine.resume()
+	coroutine.resume([])
 
 	# Check if the "test" Lua function is defined.
 	if(coroutine.function_exists("test")):
@@ -309,7 +311,7 @@ func _ready():
 	lua = LuaAPI.new()
 	coroutine = lua.new_coroutine()
 	coroutine.load_string("myNumber = 10")
-	coroutine.resume()
+	coroutine.resume([])
 
 	# Read the value of myNumber.
 	var my_number = coroutine.pull_variant("myNumber")
@@ -354,7 +356,7 @@ func _ready():
 	coroutine = lua.new_coroutine()
 	coroutine.push_variant("str", test)
 	coroutine.load_string("print(str)")
-	coroutine.resume()
+	coroutine.resume([])
 ```
 ``` title="Output"
 Hello Lua!
@@ -390,7 +392,7 @@ func _process(delta):
 	if coroutine.is_done() || timeSince <= yieldTime:
 		return
 	# coroutine.resume will either return a LuaError or an Array.
-	var ret = coroutine.resume()
+	var ret = coroutine.resume([])
 	if ret is LuaError:
 		print("ERROR %d: " % ret.type + ret.msg)
 		return
@@ -460,7 +462,7 @@ func _process(delta):
 		return
 	goodBye=false
 	# coroutine.resume will either return a LuaError or an Array.
-	var ret = coroutine.resume()
+	var ret = coroutine.resume([])
 	if ret is LuaError:
 		print("ERROR %d: " % ret.type + ret.message)
 		return
