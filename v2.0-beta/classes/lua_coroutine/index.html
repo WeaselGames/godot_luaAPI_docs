@@ -950,7 +950,20 @@ You must use the <a href="#resume">resume</a> method to execute the code that wa
 <h3 id="resume">resume <em>Variant</em></h3>
 <p>Resumes or starts the coroutine. Will either return an Array of arguments passed by Lua through the yield() function or a <a href="../lua_error/">LuaError</a>.</p>
 <h4 id="parameters_3">Parameters</h4>
-<p>None</p>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>args: <code>Array</code></td>
+<td>A array of arguments to be passed to yield() in lua (Or await in gdscript if yield_await was used).</td>
+</tr>
+</tbody>
+</table>
 <h4 id="returns_3">Returns</h4>
 <p><em>Variant</em></p>
 <hr />
@@ -1049,7 +1062,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="n">timeSince</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="o">.</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">is_done</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">yieldTime</span><span class="p">:</span>
 <a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="w">        </span><span class="k">return</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">msg</span><span class="p">)</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="w">        </span><span class="k">return</span>
@@ -1140,7 +1153,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">bind_libraries</span><span class="p">([</span><span class="s2">&quot;base&quot;</span><span class="p">])</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="n">coroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">new_coroutine</span><span class="p">()</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;user://file.lua&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="c1"># Call the &quot;test&quot; Lua function with &quot;Val1&quot;, 2 and true as arguments.</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Val1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="bp">true</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
@@ -1202,7 +1215,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="n">coroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">new_coroutine</span><span class="p">()</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s2">&quot;user://file.lua&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11"></a>
 <a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="c1"># Check if the &quot;test&quot; Lua function is defined.</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">coroutine</span><span class="o">.</span><span class="n">function_exists</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)):</span>
@@ -1267,7 +1280,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="n">coroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">new_coroutine</span><span class="p">()</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;myNumber = 10&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11"></a>
 <a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">    </span><span class="c1"># Read the value of myNumber.</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">my_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">pull_variant</span><span class="p">(</span><span class="s2">&quot;myNumber&quot;</span><span class="p">)</span>
@@ -1326,7 +1339,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="n">coroutine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">new_coroutine</span><span class="p">()</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
 <a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s2">&quot;print(str)&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Hello Lua!
 </code></pre></div></p>
@@ -1388,7 +1401,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">is_done</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeSince</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">yieldTime</span><span class="p">:</span>
 <a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="k">return</span>
 <a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="c1"># coroutine.resume will either return a LuaError or an Array.</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
 <a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">msg</span><span class="p">)</span>
 <a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">        </span><span class="k">return</span>
@@ -1510,7 +1523,7 @@ It takes an array as an argument, which is then passed to <code>LuaCoroutine.res
 <a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">        </span><span class="k">return</span>
 <a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">    </span><span class="n">goodBye</span><span class="o">=</span><span class="bp">false</span>
 <a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">    </span><span class="c1"># coroutine.resume will either return a LuaError or an Array.</span>
-<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coroutine</span><span class="o">.</span><span class="n">resume</span><span class="p">([])</span>
 <a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
 <a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ret</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
 <a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="w">        </span><span class="k">return</span>
