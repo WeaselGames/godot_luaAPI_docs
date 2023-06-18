@@ -6,6 +6,23 @@ The LuaAPI class is used to interact with Lua from GDScript.
 
 This class provides the methods to execute Lua code; to call Lua functions from GDScript; to read and write the value of global Lua variables; to create a Lua constructor for a GDScript class and more.
 
+## Enumerations
+### ErrorType
+| Name | Value | Description |
+| --- | --- | --- |
+| HOOK_MASK_CALL | 1 | Bitmask to specifie which events the hook will be called for. |
+| HOOK_MASK_RETURN | 2 | Bitmask to specifie which events the hook will be called for. |
+| HOOK_MASK_LINE | 4 | Bitmask to specifie which events the hook will be called for. |
+| HOOK_MASK_COUNT | 8 | Bitmask to specifie which events the hook will be called for. |
+
+---
+
+## Properties
+### permissive _String_
+Sets weather an Objects lua_field method should be treated as a whitelist or a blacklist. By default its false meaning it acts as a whitelist.
+
+---
+
 ## Methods
 
 ### bind_libraries _void_ {#bind_libraries}
