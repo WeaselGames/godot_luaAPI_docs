@@ -25,6 +25,7 @@ var player2: Player
 
 func _ready():
 	lua = LuaAPI.new()
+	lua.permissive = true
 	player2 = Player.new()
 	lua.push_variant("getPlayer2", func(): return player2)
 	lua.expose_constructor("Player", Player)
@@ -79,6 +80,7 @@ class Player:
 
 func _ready():
 	lua = LuaAPI.new()
+	lua.permissive = true
 	lua.expose_constructor("Player", Player)
 
 	var err = lua.do_string("""
@@ -120,6 +122,7 @@ class Player:
 
 func _ready():
 	lua = LuaAPI.new()
+	lua.permissive = true
 	lua.expose_constructor("Player", Player)
 
 	var err = lua.do_string("""
