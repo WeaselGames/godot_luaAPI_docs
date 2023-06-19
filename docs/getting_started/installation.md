@@ -13,7 +13,7 @@ The first thing you will need to do is obtain a copy of the editor built with th
 - [🍎 MacOS Editor](https://github.com/WeaselGames/godot_luaAPI/releases/latest/download/macos-editor.zip)
 - [🍎 MacOS Editor LuaJIT](https://github.com/WeaselGames/godot_luaAPI/releases/latest/download/macos-editor-luajit.zip)
 - [🗜️ Export Templates](https://github.com/WeaselGames/godot_luaAPI/releases/latest/download/export-templates.tpz)
-For previous versions see [releases](https://github.com/WeaselGames/godot_luaAPI/releases)
+- For previous versions see [releases](https://github.com/WeaselGames/godot_luaAPI/releases)
 
 ## Compiling from source
 
