@@ -404,8 +404,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
+  <a href="#hookmask" class="md-nav__link">
+    HookMask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcoption" class="md-nav__link">
+    GCOption
   </a>
   
 </li>
@@ -502,6 +509,13 @@
           <li class="md-nav__item">
   <a href="#set_hook" class="md-nav__link">
     set_hook void
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure_gc" class="md-nav__link">
+    configure_gc int
   </a>
   
 </li>
@@ -768,8 +782,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
+  <a href="#hookmask" class="md-nav__link">
+    HookMask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcoption" class="md-nav__link">
+    GCOption
   </a>
   
 </li>
@@ -871,6 +892,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure_gc" class="md-nav__link">
+    configure_gc int
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#new_coroutine" class="md-nav__link">
     new_coroutine LuaCoroutine
   </a>
@@ -912,7 +940,7 @@
 <p>The LuaAPI class is used to interact with Lua from GDScript.  </p>
 <p>This class provides the methods to execute Lua code; to call Lua functions from GDScript; to read and write the value of global Lua variables; to create a Lua constructor for a GDScript class and more.</p>
 <h2 id="enumerations">Enumerations</h2>
-<h3 id="errortype">ErrorType</h3>
+<h3 id="hookmask">HookMask</h3>
 <table>
 <thead>
 <tr>
@@ -941,6 +969,58 @@
 <td>HOOK_MASK_COUNT</td>
 <td>8</td>
 <td>Bitmask to specifie which events the hook will be called for.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gcoption">GCOption</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GC_STOP</td>
+<td>0</td>
+<td>Stops the garbage collector.</td>
+</tr>
+<tr>
+<td>GC_RESTART</td>
+<td>1</td>
+<td>Restarts the garbage collector.</td>
+</tr>
+<tr>
+<td>GC_COLLECT</td>
+<td>2</td>
+<td>Performs a full garbage-collection cycle.</td>
+</tr>
+<tr>
+<td>GC_COUNT</td>
+<td>3</td>
+<td>Returns the current amount of memory (in Kbytes) in use by Lua.</td>
+</tr>
+<tr>
+<td>GC_COUNTB</td>
+<td>4</td>
+<td>Returns the remainder of dividing the current amount of bytes of memory in use by Lua by 1024.</td>
+</tr>
+<tr>
+<td>GC_STEP</td>
+<td>5</td>
+<td>Performs an incremental step of garbage collection.</td>
+</tr>
+<tr>
+<td>GC_SETPAUSE</td>
+<td>6</td>
+<td>Sets <code>data</code> as the new value for the pause of the collector.</td>
+</tr>
+<tr>
+<td>GC_SETSTEPMUL</td>
+<td>7</td>
+<td>Sets <code>data</code> as the new value for the step multiplier of the collector.</td>
 </tr>
 </tbody>
 </table>
@@ -1482,14 +1562,39 @@
 <a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>Good Bye World!
 </code></pre></div></p>
 <hr />
+<h3 id="configure_gc">configure_gc <em>int</em></h3>
+<p>Controls the garbage collector. The option can be one of the following: <code>GC_STOP</code>, <code>GC_RESTART</code>, <code>GC_COLLECT</code>, <code>GC_COUNT</code>, <code>GC_STEP</code>, <code>GC_SETPAUSE</code>, <code>GC_SETSTEPMUL</code>. The data is the argument for the option. Returns the result of the option.</p>
+<p>For more info, see the lua manual https://www.lua.org/manual/5.4/manual.html#lua_gc</p>
+<h4 id="parameters_9">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>option: <code>int</code></td>
+<td>The <a href="#gcoption">GCOption</a>.</td>
+</tr>
+<tr>
+<td>data: <code>int</code></td>
+<td>Argument for the specific option.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns_9">Returns</h4>
+<p><em>int</em></p>
+<hr />
 <h3 id="new_coroutine">new_coroutine <em><a href="../lua_coroutine/">LuaCoroutine</a></em></h3>
 <p>Creates and binds a LuaCoroutine object to a LuaAPI object. This method is equivalent to creating a new coroutine object and then calling its <a href="#bind">bind</a> method.</p>
-<h4 id="returns_9">Returns</h4>
+<h4 id="returns_10">Returns</h4>
 <p><em><a href="../lua_coroutine/">LuaCoroutine</a></em></p>
 <hr />
 <h3 id="do_file">get_running_coroutine <em><a href="../lua_coroutine/">LuaCoroutine</a></em></h3>
 <p>Intended to be called from a lua hook. Returns the current running coroutine.</p>
-<h4 id="returns_10">Returns</h4>
+<h4 id="returns_11">Returns</h4>
 <p><em><a href="../lua_coroutine/">LuaCoroutine</a></em></p>
 
 
