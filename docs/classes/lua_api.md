@@ -7,13 +7,25 @@ The LuaAPI class is used to interact with Lua from GDScript.
 This class provides the methods to execute Lua code; to call Lua functions from GDScript; to read and write the value of global Lua variables; to create a Lua constructor for a GDScript class and more.
 
 ## Enumerations
-### ErrorType
+### HookMask
 | Name | Value | Description |
 | --- | --- | --- |
 | HOOK_MASK_CALL | 1 | Bitmask to specifie which events the hook will be called for. |
 | HOOK_MASK_RETURN | 2 | Bitmask to specifie which events the hook will be called for. |
 | HOOK_MASK_LINE | 4 | Bitmask to specifie which events the hook will be called for. |
 | HOOK_MASK_COUNT | 8 | Bitmask to specifie which events the hook will be called for. |
+
+### GCOption
+| Name | Value | Description |
+| --- | --- | --- |
+| GC_STOP | 0 | Stops the garbage collector. |
+| GC_RESTART | 1 | Restarts the garbage collector. |
+| GC_COLLECT | 2 | Performs a full garbage-collection cycle. |
+| GC_COUNT | 3 | Returns the current amount of memory (in Kbytes) in use by Lua. |
+| GC_COUNTB | 4 | Returns the remainder of dividing the current amount of bytes of memory in use by Lua by 1024. |
+| GC_STEP | 5 | Performs an incremental step of garbage collection. |
+| GC_SETPAUSE | 6 | Sets `data` as the new value for the pause of the collector. |
+| GC_SETSTEPMUL | 7 | Sets `data` as the new value for the step multiplier of the collector. |
 
 ---
 
@@ -414,6 +426,25 @@ Good Bye World!
 Good Bye World!
 Good Bye World!
 ```
+
+---
+
+### configure_gc _int_ {#configure_gc}
+
+Controls the garbage collector. The option can be one of the following: `GC_STOP`, `GC_RESTART`, `GC_COLLECT`, `GC_COUNT`, `GC_STEP`, `GC_SETPAUSE`, `GC_SETSTEPMUL`. The data is the argument for the option. Returns the result of the option.
+
+For more info, see the lua manual https://www.lua.org/manual/5.4/manual.html#lua_gc
+
+#### Parameters
+
+| Parameters    | Description                       |
+| ------------- | --------------------------------- |
+| option: `int` | The [GCOption](#gcoption).        |
+| data: `int`   | Argument for the specific option. |
+
+#### Returns
+
+_int_
 
 ---
 
