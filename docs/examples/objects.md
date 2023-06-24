@@ -5,7 +5,7 @@ Normally, when using `push_variant()` or the return value of a GDScript function
 !!! info "In the background..."
 	In order to call functions and get values from the object we assign the mt_Object metatable to it. This is a custom metatable we defined for Objects. This allows for methods to be called on the object, values to be get/set on the Object and much more.
 ### lua_fields
-By default every field and method is available to Lua. You can limit what Lua has access to by defining either the `lua_fields()` method, which must return an Array of the names of allowed fields/methods, or by defining the `__index()` method, which takes reference to the [LuaAPI](../classes/lua_api.md) and a string of the field being requested by Lua. If you would like to allow the field, add it's name to the array and return it.
+By default every field and method is available to Lua. You can limit what Lua has access to by defining either the `lua_fields()` method, which must return an Array of the names of fields/methods. By default this array is treated as a blacklist of blocked methos. If you set [permissive](../classes/lua_api.md#permissive-bool) to true, it will be treated as a whitelist. The other way to limit access is by defining the `__index()` method, which takes reference to the [LuaAPI](../classes/lua_api.md) and a string of the field being requested by Lua. You can then return any value you please to lua.
 
 Below is an example of passing a Object to Lua:
 ```gdscript linenums="1"
@@ -15,7 +15,7 @@ var lua: LuaAPI
 
 class Player:
 	var pos = Vector2(0, 0)
-	# If lua_fields is not defined or returns a empty array, all functions and fields will be available.
+	# By default lua_fields returns a black list of methods to block, since we set permissive to false however, it is treated as a whitelist instead.
 	func lua_fields():
 		return ["pos", "move_forward"]
 	func move_forward():
@@ -25,7 +25,7 @@ var player2: Player
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.permissive = true
+	lua.permissive = false
 	player2 = Player.new()
 	lua.push_variant("getPlayer2", func(): return player2)
 	lua.expose_constructor("Player", Player)
@@ -80,7 +80,6 @@ class Player:
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.permissive = true
 	lua.expose_constructor("Player", Player)
 
 	var err = lua.do_string("""
@@ -122,7 +121,6 @@ class Player:
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.permissive = true
 	lua.expose_constructor("Player", Player)
 
 	var err = lua.do_string("""

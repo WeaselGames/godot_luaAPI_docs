@@ -10,10 +10,10 @@ This class provides the methods to execute Lua code; to call Lua functions from 
 ### HookMask
 | Name | Value | Description |
 | --- | --- | --- |
-| HOOK_MASK_CALL | 1 | Bitmask to specifie which events the hook will be called for. |
-| HOOK_MASK_RETURN | 2 | Bitmask to specifie which events the hook will be called for. |
-| HOOK_MASK_LINE | 4 | Bitmask to specifie which events the hook will be called for. |
-| HOOK_MASK_COUNT | 8 | Bitmask to specifie which events the hook will be called for. |
+| HOOK_MASK_CALL | 1 | Bitmask to specify which events the hook will be called for. |
+| HOOK_MASK_RETURN | 2 | Bitmask to specify which events the hook will be called for. |
+| HOOK_MASK_LINE | 4 | Bitmask to specify which events the hook will be called for. |
+| HOOK_MASK_COUNT | 8 | Bitmask to specify which events the hook will be called for. |
 
 ### GCOption
 | Name | Value | Description |
@@ -30,8 +30,10 @@ This class provides the methods to execute Lua code; to call Lua functions from 
 ---
 
 ## Properties
-### permissive _String_
-Sets weather an Objects lua_field method should be treated as a whitelist or a blacklist. By default its false meaning it acts as a whitelist.
+### permissive _Bool_
+When set to true all methods will be allowed on Objects be default and lua_fields is treated as a blacklist. When set to false, lua_fields is treated as a whitelist.
+
+Default value is true.
 
 ---
 
@@ -42,7 +44,7 @@ Sets weather an Objects lua_field method should be treated as a whitelist or a b
 Takes an array of strings and binds the Lua state to each library. It is case insensitive.  
 
 !!! danger
-	The IO, Package and OS libraries have some dangerous methods such as `os.execute`, `require` or `io.write`. Make these libraries available to the end user at your own risk.
+	The IO, Debug, Package and OS libraries have some dangerous methods such as `os.execute`, `require` or `io.write`. Make these libraries available to the end user at your own risk.
 
 !!! info
 	You can learn more about the available libraries and their methods in the official [Lua manual](http://www.lua.org/manual/5.4/manual.html#6).

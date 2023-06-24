@@ -1,8 +1,6 @@
 # Home
 
-## Godot LuaAPI V2.0-beta
-!!! warning
-    this is a **beta** version of the addon made for Godot v4.0-stable. Which means frequent recompiles may be required and compatibility is not guaranteed between updates.
+## Godot LuaAPI v2.0
 
 <figure markdown>  
   ![Godot LuaAPI logo](./assets/luaapi_logo.png)
