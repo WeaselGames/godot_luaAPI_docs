@@ -202,18 +202,16 @@ var lua: LuaAPI
 
 class Player:
 	var pos = Vector2(0, 0)
-	# If lua_funcs is not defined or returns an empty array, all class methods will be available in Lua.
-	func lua_funcs():
-		return ["move_forward"]
-	# lua_fields behaves similarly to lua_funcs but for fields.
+	# By default, lua_fields will act as a blacklist. But by setting permissive to false we can make it function as a whitelist.
 	func lua_fields():
-		return ["pos"]
+		return ["pos", "move_forward"]
 
 	func move_forward():
 		pos.x += 1
 
 func _ready():
 	lua = LuaAPI.new()
+        lua.permissive = false
 	lua.expose_constructor("Player", Player)
 	lua.do_string("player = Player() player.move_forward() print(player.pos.x)")
 	var player = lua.pull_variant("player")
