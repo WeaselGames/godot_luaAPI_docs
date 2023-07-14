@@ -4,8 +4,10 @@ Normally, when using `push_variant()` or the return value of a GDScript function
 ## Controlling access to fields and methods
 !!! info "In the background..."
 	In order to call functions and get values from the object we assign the mt_Object metatable to it. This is a custom metatable we defined for Objects. This allows for methods to be called on the object, values to be get/set on the Object and much more.
-### lua_fields
-By default every field and method is available to Lua. You can limit what Lua has access to by defining either the `lua_fields()` method, which must return an Array of the names of fields/methods. By default this array is treated as a blacklist of blocked methos. If you set [permissive](../classes/lua_api.md#permissive-bool) to true, it will be treated as a whitelist. The other way to limit access is by defining the `__index()` method, which takes reference to the [LuaAPI](../classes/lua_api.md) and a string of the field being requested by Lua. You can then return any value you please to lua.
+### With the default object metatable
+By default every field and method is available to Lua. You can limit what Lua has access to by defining either the `lua_fields()` method, which must return an Array of the names of fields/methods. By default this array is treated as a blacklist of methos. If you set [permissive](../classes/lua_default_object_metatable.md#permissive-bool) to `false`, it will be treated as a whitelist instead. The other way to limit access is by defining the `__index()` method, which takes reference to the [LuaAPI](../classes/lua_api.md) object and a string of the field being requested by Lua. You can then return any value you please to lua.
+
+This is all made possible by the [LuaDefaultObjectMetatable](../classes/lua_default_object_metatable.md) assigned to the `object_metatable` field on the [LuaAPI](../classes/lua_api.md) object by default. For even more control, you can define your own object metatable. See the [LuaObjectMetatable](../classes/lua_object_metatable.md) class.
 
 Below is an example of passing a Object to Lua:
 ```gdscript linenums="1"
@@ -15,7 +17,7 @@ var lua: LuaAPI
 
 class Player:
 	var pos = Vector2(0, 0)
-	# By default lua_fields returns a black list of methods to block, since we set permissive to false however, it is treated as a whitelist instead.
+	# By default lua_fields returns a blacklist of methods to block, since we set permissive to false however, it is treated as a whitelist instead.
 	func lua_fields():
 		return ["pos", "move_forward"]
 	func move_forward():
@@ -25,7 +27,8 @@ var player2: Player
 
 func _ready():
 	lua = LuaAPI.new()
-	lua.permissive = false
+	# The default metatable is a LuaDefaultObjectMetatable instance. This provides v2.0 like functionality 
+	lua.object_metatable.permissive = false
 	player2 = Player.new()
 	lua.push_variant("getPlayer2", func(): return player2)
 	lua.expose_constructor("Player", Player)
@@ -57,7 +60,7 @@ For some, the previous approach is still too limiting though. So we also allow y
 	You can learn more about all available metamethods in the official [Lua manual](https://www.lua.org/manual/5.3/manual.html#2.4).
 
 #### __index
-The __index metamethod is called when Lua tries to get a value from an object. This is the same as if you were using the `.` operator in Lua or the `[]` operator. Essentially, this is what the `lua_fields()` method is doing. However, you may want to do more than just return a value. You can also raise an error or return a custom value. 
+The __index metamethod is called when Lua tries to get a value from an object. This is when you are using the `.index` or the `['index']` operator in Lua. Essentially, this is what the `lua_fields()` method is doing. However, you may want to do more than just return a value. You can also raise an error or return a custom value. 
 
 The __index method must take two arguments. The first is a reference to the [LuaAPI](../classes/lua_api.md) object. The second is the name of the field/method being requested. The method may return the value of the field/method or a [LuaError](../classes/lua_error.md) to raise an error.
 
@@ -73,8 +76,14 @@ class Player:
 	func __index(ref: LuaAPI, index):
 		if index=="pos":
 			return pos
+		elif index=="move_backward":
+			return move_backward
 		else:
 			return LuaError.new_error("Invalid index '%s'" % index)
+	
+	func move_backward():
+		pos.x+=1
+
 	func move_forward():
 		pos.x+=1
 
@@ -85,6 +94,7 @@ func _ready():
 	var err = lua.do_string("""
     player = Player()
     print(player.pos.x)
+	player.move_backward()
     player.move_forward() -- This will cause our custom error
     """)
 

@@ -31,6 +31,8 @@ nav:
       - classes/lua_error.md
       - classes/lua_callable_extra.md
       - classes/lua_tuple.md
+      - classes/lua_object_metatable.md
+      - classes/lua_default_object_metatable.md
   - Examples:
       - examples/objects.md
   - Contributing:

@@ -1,6 +1,6 @@
 # Home
 
-## Godot LuaAPI v2.0
+## Godot LuaAPI v2.1
 
 <figure markdown>  
   ![Godot LuaAPI logo](./assets/luaapi_logo.png)

@@ -6,6 +6,8 @@ The LuaAPI class is used to interact with Lua from GDScript.
 
 This class provides the methods to execute Lua code; to call Lua functions from GDScript; to read and write the value of global Lua variables; to create a Lua constructor for a GDScript class and more.
 
+---
+
 ## Enumerations
 ### HookMask
 | Name | Value | Description |
@@ -30,10 +32,15 @@ This class provides the methods to execute Lua code; to call Lua functions from 
 ---
 
 ## Properties
-### permissive _Bool_
-When set to true all methods will be allowed on Objects be default and lua_fields is treated as a blacklist. When set to false, lua_fields is treated as a whitelist.
+### object_metatable *[LuaObjectMetatable](lua_object_metatable.md)*
+This defines the default object metatable to be used when an object does not define a `lua_metatable` field.
 
-Default value is true.
+Default value is a [LuaDefaultObjectMetatable](lua_default_object_metatable.md) instance.
+
+### memory_limit _int_
+This defines the maximum amount of memory the Lua state can use in bytes. When 0 there is no limit. When the Lua state reaches the memory limit, it will throw a memory allocation error.
+
+Default value is 0.
 
 ---
 
@@ -458,10 +465,20 @@ Creates and binds a LuaCoroutine object to a LuaAPI object. This method is equiv
 
 ---
 
-### get_running_coroutine *[LuaCoroutine](lua_coroutine.md)* {#do_file}
+### get_running_coroutine *[LuaCoroutine](lua_coroutine.md)* {#get_running_coroutine}
 
 Intended to be called from a lua hook. Returns the current running coroutine.
 
 #### Returns
 
 *[LuaCoroutine](lua_coroutine.md)*
+
+---
+
+### get_memory_usage _int_ {#get_memory_usage}
+
+Returns the current memory usage of the Lua state in bytes.
+
+#### Returns
+
+_int_
