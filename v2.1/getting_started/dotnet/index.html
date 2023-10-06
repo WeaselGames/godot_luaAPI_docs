@@ -9,10 +9,6 @@
       
       
       
-        <link rel="prev" href="../lua_coroutine/">
-      
-      
-        <link rel="next" href="../lua_callable_extra/">
       
       
       <link rel="icon" href="../../assets/sandcastle_icon.png">
@@ -20,7 +16,7 @@
     
     
       
-        <title>LuaError - Godot LuaAPI</title>
+        <title>Godot Lua API DotNet Notes - Godot LuaAPI</title>
       
     
     
@@ -75,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#luaerror" class="md-skip">
+        <a href="#godot-lua-api-dotnet-notes" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LuaError
+              Godot Lua API DotNet Notes
             
           </span>
         </div>
@@ -310,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/before_you_start/" class="md-nav__link">
+      <a href="../before_you_start/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -330,7 +326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/installation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -350,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/getting_started/" class="md-nav__link">
+      <a href="../getting_started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -375,8 +371,6 @@
       
   
   
-    
-  
   
     
     
@@ -386,12 +380,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -405,7 +399,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Classes
@@ -418,7 +412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_api/" class="md-nav__link">
+      <a href="../../classes/lua_api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -438,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_coroutine/" class="md-nav__link">
+      <a href="../../classes/lua_coroutine/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -456,29 +450,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    LuaError
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../classes/lua_error/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -487,100 +461,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enumerations" class="md-nav__link">
-    Enumerations
-  </a>
-  
-    <nav class="md-nav" aria-label="Enumerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-    <nav class="md-nav" aria-label="Properties">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#message-string" class="md-nav__link">
-    message String
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-errortype" class="md-nav__link">
-    type ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new_err" class="md-nav__link">
-    new_error LuaError
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -592,7 +472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_callable_extra/" class="md-nav__link">
+      <a href="../../classes/lua_callable_extra/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -612,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_tuple/" class="md-nav__link">
+      <a href="../../classes/lua_tuple/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -632,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_object_metatable/" class="md-nav__link">
+      <a href="../../classes/lua_object_metatable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -652,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lua_default_object_metatable/" class="md-nav__link">
+      <a href="../../classes/lua_default_object_metatable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -872,76 +752,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enumerations" class="md-nav__link">
-    Enumerations
+  <a href="#commands" class="md-nav__link">
+    Commands
   </a>
-  
-    <nav class="md-nav" aria-label="Enumerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#errortype" class="md-nav__link">
-    ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#example-notes" class="md-nav__link">
+    Example Notes
   </a>
-  
-    <nav class="md-nav" aria-label="Properties">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#message-string" class="md-nav__link">
-    message String
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-errortype" class="md-nav__link">
-    type ErrorType
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new_err" class="md-nav__link">
-    new_error LuaError
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -963,128 +790,73 @@
   
 
 
-<h1 id="luaerror">LuaError</h1>
-<h2 id="description">Description</h2>
-<p>A LuaError represents an error that happened in Lua.  </p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Most functions in this addon return either a LuaError or null. </p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You may return a LuaError object from a GDScript function, called from Lua, in order to cause an error in Lua.</p>
-</div>
-<h2 id="enumerations">Enumerations</h2>
-<h3 id="errortype">ErrorType</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ERR_TYPE</td>
-<td>1</td>
-<td>Invalid type error. For example, passing a string when an int was expected.</td>
-</tr>
-<tr>
-<td>ERR_RUNTIME</td>
-<td>2</td>
-<td>Lua runtime error.</td>
-</tr>
-<tr>
-<td>ERR_SYNTAX</td>
-<td>3</td>
-<td>Lua syntax error.</td>
-</tr>
-<tr>
-<td>ERR_MEMORY</td>
-<td>4</td>
-<td>Lua ran out of memory.</td>
-</tr>
-<tr>
-<td>ERR_ERR</td>
-<td>5</td>
-<td>Error while handling another error.</td>
-</tr>
-<tr>
-<td>ERR_FILE</td>
-<td>6</td>
-<td>Error while opening or reading a file.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="properties">Properties</h2>
-<h3 id="message-string">message <em>String</em></h3>
-<p>A string containing the error message.</p>
-<hr />
-<h3 id="type-errortype">type <a href="#errortype"><em>ErrorType</em></a></h3>
-<p>An enum representing the type of the error.</p>
-<hr />
-<h2 id="methods">Methods</h2>
-<h3 id="new_err">new_error <em>LuaError</em></h3>
-<p>Static function that acts as a constructor for new instances of the LuaError class.</p>
-<h4 id="parameters">Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameters</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>message: <code>String</code></td>
-<td>The error message.</td>
-</tr>
-<tr>
-<td>type: <code>ErrorType</code></td>
-<td>An enum representing the type of this error.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="returns">Returns</h4>
-<p><em>LuaError</em></p>
-<h4 id="example">Example</h4>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">):</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">        </span><span class="c1">## This will raise an error in the Lua state.</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">new_error</span><span class="p">(</span><span class="s2">&quot;N is not 5 but is </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">LuaError</span><span class="o">.</span><span class="n">ERR_RUNTIME</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">5</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">():</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaAPI</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">lua</span><span class="o">.</span><span class="n">push_variant</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">test</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="c1">## Most methods return a LuaError.</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="c1">## Calling &quot;test&quot; with a type that is not a int would also raise a error.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="o">.</span><span class="n">do_string</span><span class="p">(</span><span class="s2">&quot;test(6)&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="c1">## If an error does not occur, err will be null.</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">LuaError</span><span class="p">:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR </span><span class="si">%d</span><span class="s2">: &quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">err</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ERROR 2: [LUA_ERRRUN - runtime error ]
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>N is not 5 but is 6
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>stack traceback:
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    [string &quot;test(6)&quot;]:1: in main chunk
+<h1 id="godot-lua-api-dotnet-notes">Godot Lua API DotNet Notes</h1>
+<!-- TOC -->
+<ul>
+<li><a href="#godot-lua-api-dotnet-notes">Godot Lua API DotNet Notes</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#example-notes">Example Notes</a></li>
+</ul>
+<!-- TOC -->
+
+<h2 id="introduction">Introduction</h2>
+<p>When working with this version of the editor, or the extension addon, you will need to use specific versions of the 
+nuget packages for your project. This has been tested with v2.1-beta6.</p>
+<p>For this document, we will use <em>nix style paths. If you are a Windows user, please convert lines like <code>/path/to/</code> to 
+<code>C:\path\to\</code> so that it will work with your system. MacOS users can use the </em>nix paths.</p>
+<p>The editor builds have a file named <code>mono_instructions.txt</code> included in the zipped release.
+The contents of this file are as follows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>If you have GodotSharp locally cached dotnet may use one of them instead. To clear local cache run the following command:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>dotnet nuget locals all --clear
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>To add the local nuget source, please run the following command:
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>dotnet nuget add source /path/to/nuget_packages/ --name LuaAPINugetSource
+</code></pre></div>
+<p>What this is saying is that you will want to open up a command prompt and do the following steps to install the correct 
+nuget packages into your project. If you have downloaded the editor zip file, it comes with a directory named <code>nuget_packages</code> 
+This is the directory that you will want to include into the second step in the instructions file. So, if you have extracted 
+the Editor to <code>C:\Users\username\Godot</code> the correct path to use would be <code>C:\Users\username\Godot\nuget_packages</code>. 
+Likewise, if you extracted the editor to <code>/home/username/Godot/</code> you would want to use <code>/home/username/Godot/nuget_packages</code>.</p>
+<p>Make sure to enclose directories with spaces with either a <code>"</code> or <code>'</code> so that the path resolves correctly.</p>
+<p>Additionally, you will most likely want to execute a <code>dotnet restore</code> command to install the correct nuget packages. See 
+Commands below for an example on how to do this.</p>
+<h2 id="commands">Commands</h2>
+<p>In your command prompt, execute these commands in the following order.</p>
+<p><code>dotnet nuget locals all --clear</code></p>
+<p><code>dotnet nuget add source /path/to/nuget_packages/ --name LuaAPINugetSource</code></p>
+<p><code>dotnet restore '/pathtoproject/example_project.csproj' -f -s  LuaAPINugetSource</code></p>
+<p>This will set up the proper packages to work with the Editor / Add-on. Note: you may have to select the correct nuget 
+source within your IDE. If so, please use the <code>LuaAPINugetSource</code> option. Note that in the third command, we are using 
+the specific location (<code>-s &lt;source&gt;</code>) and we are forcing (<code>-f</code>) the restore. This is done to specifically use the custom 
+nuget packages.</p>
+<p>Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the 
+Godot Editor.</p>
+<h2 id="example-notes">Example Notes</h2>
+<p>As you can expect, the method names in the LuaAPI class are in Dotnet style. So, something like <code>LuaAPI.push_variant</code> 
+would be <code>LuaAPI.PushVariant</code></p>
+<p>Starter Example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Node2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Node2D</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="c1">// Called when the node enters the scene tree for the first time.</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Hello from C#&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">LuaApi</span><span class="w"> </span><span class="n">lua</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LuaApi</span><span class="p">();</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">lua</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">&quot;print(\&quot;Hello from Lua\&quot;)&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+</code></pre></div>
+Note that <code>lua.DoString()</code> is the dotnet version of <code>lua.do_string()</code>.</p>
+<p>The above starter example will produce its output into the Godot Output window in the Godot Editor. Here is the exact 
+output it produces.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Hello from C#
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Hello from Lua
 </code></pre></div></p>
+<p>More <a href="csexamples%2FEXAMPLE1.md">examples</a> will be included very soon (see Wiki).</p>
 
 
 
@@ -1107,44 +879,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../lua_coroutine/" class="md-footer__link md-footer__link--prev" aria-label="Previous: LuaCoroutine">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                LuaCoroutine
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../lua_callable_extra/" class="md-footer__link md-footer__link--next" aria-label="Next: LuaCallableExtra">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                LuaCallableExtra
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
