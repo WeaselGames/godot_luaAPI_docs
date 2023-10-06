@@ -25,6 +25,7 @@ nav:
   - Getting Started:
       - getting_started/before_you_start.md
       - getting_started/installation.md
+      - getting_started/getting_started.md
   - Classes:
       - classes/lua_api.md
       - classes/lua_coroutine.md
@@ -35,6 +36,7 @@ nav:
       - classes/lua_default_object_metatable.md
   - Examples:
       - examples/objects.md
+      - examples/dotnet/example1.md
   - Contributing:
       - contributing/ways_to_contribute.md
       - contributing/development_environment.md

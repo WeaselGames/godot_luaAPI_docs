@@ -1,3 +1,4 @@
 site/
 *.sh
 *.ps1
+/.idea/
