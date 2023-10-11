@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/sandcastle_icon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.4">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.bd3936ea.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6a10b989.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.356b1318.min.css">
@@ -832,11 +832,25 @@
 <h1 id="godot-lua-api-c-examples">Godot Lua API C# Examples</h1>
 <p>All future examples will be in the <a href="https://luaapi.weaselgames.info/latest">Wiki</a>.</p>
 <h2 id="getting-started-example-in-c">Getting Started Example (In C#)</h2>
-<p>In this example, we recreate the main GDScript example from the README.md file. I have fully commented this 
-example, to explain what each part does. Specific differences and a special note on this example: In C# you 
-cannot assign a Method to a <code>Variant</code> for use with <code>LuaAPI.PushVariant</code>. So, to get around that, and make the 
-example work, we will first wrap our called function in a <code>Callable</code> variable (wrapper). Please note the line 
+<p>In this example, we recreate the main GDScript example from the README.md file. I have fully commented this
+example, to explain what each part does. Specific differences and a special note on this example: In C# you
+cannot assign a Method to a <code>Variant</code> for use with <code>LuaAPI.PushVariant</code>. So, to get around that, and make the
+example work, we will first wrap our called function in a <code>Callable</code> variable (wrapper). Please note the line
 <code>Callable print = new Callable(this, MethodName.LuaPrint);</code> in the example below.</p>
+<ul>
+<li>Notes on Using <code>LuaFunctionRef</code>: It is the preferred way to call functions from within your Lua code base, if you do 
+  not know the function name ahead of time, or if the function is not global. <code>LuaFunctionRef</code> will still be invokable 
+  if it is a global function, and that global function was overwritten, as it is copied into the lua state, and then 
+  referenced inside of C#. Removing all references to the LuaFunctionRef will release it out of the lua state and free 
+  up the state's memory. This means that <code>LuaAPI.CallFunction()</code> uses less resources in the lua state, so keep that in mind. </li>
+</ul>
+<p>This example also shows how to use the newly added <code>LuaFunctionRef</code> class to <code>invoke</code> a lua function. This allows
+for creating a call back function to respond to things like events. Note how we use <code>.As&lt;LuaFunctionRef&gt;()</code> to cast
+the Variant <code>val</code> into a <code>LuaFunctionRef</code> variable (<code>get_message</code>). Additionally, we do not need to use the nullable
+invoke style common to most event firing, as the <code>get_message</code> variable is not null. The <code>.Invoke()</code> method takes a
+<code>Godot.Collections.Array</code> as its only parameter. In this example, we make use of the shorthand to create a <code>new</code> object
+for the Godot Array class. This shorthand is only possible because of the way that Godot defines the <code>Array</code> class, and
+is not a normal C# <code>new Object()</code> creation style.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">Godot</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">public</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Node2D</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Node2D</span><span class="w"> </span><span class="p">{</span>
@@ -851,11 +865,11 @@ example work, we will first wrap our called function in a <code>Callable</code> 
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="c1">// All builtin libraries are available to bind with. Use OS and IO at your own risk.</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="c1">// BindLibraries requires a &quot;Godot Array&quot; so, let&#39;s build one.</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="p">();</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="n">libraries</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;base&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Base Lua commands</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="n">libraries</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;table&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Table functionality.</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="n">libraries</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;string&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// String Specific functionality.</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">            </span><span class="s">&quot;base&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Base Lua commands</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">            </span><span class="s">&quot;table&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Table functionality.</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">            </span><span class="s">&quot;string&quot;</span><span class="w"> </span><span class="c1">// String Specific functionality.</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="p">};</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="n">lua</span><span class="p">.</span><span class="n">BindLibraries</span><span class="p">(</span><span class="n">libraries</span><span class="p">);</span><span class="w"> </span><span class="c1">// Assign the specified libraries to the LuaAPI object.</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="c1">// In C#, .PushVariant does not work with Methods, so we use Callable to wrap our function.</span>
@@ -889,24 +903,31 @@ example work, we will first wrap our called function in a <code>Callable</code> 
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;ERROR %d: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">Type</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
 <a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="p">.</span><span class="n">PullVariant</span><span class="p">(</span><span class="s">&quot;get_message&quot;</span><span class="p">);</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="c1">// Let&#39;s pull our lua function from the lua code.</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="p">.</span><span class="n">PullVariant</span><span class="p">(</span><span class="s">&quot;get_message&quot;</span><span class="p">);</span>
 <a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="w">        </span><span class="c1">// Check to see if it returned an error, or a value.</span>
 <a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">val</span><span class="p">.</span><span class="n">GetType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">typeof</span><span class="p">(</span><span class="n">LuaError</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;ERROR %d: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">Type</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="w">            </span><span class="k">return</span><span class="p">;</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="w">        </span><span class="c1">// LuaAPI.CallFunction requires a Godot.Collections.Array as the container</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="w">        </span><span class="c1">// for the parameters passed in, for the lua function. </span>
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">Params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="p">();</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="w">        </span><span class="c1">// We use .CallFunction to actually call the lua function within the Lua State.</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lua</span><span class="p">.</span><span class="n">CallFunction</span><span class="p">(</span><span class="s">&quot;get_message&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Params</span><span class="p">);</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="w">        </span><span class="c1">// And, finally, we log the output of the function to Godot Output Console.</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="p">}</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="w">        </span><span class="c1">// We create a LuaFunctionRef as our reference to the Lua code&#39;s function,</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="w">        </span><span class="c1">// then we use .As&lt;LuaFunctionRef&gt;() to cast it as a LuaFunctionRef.</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">        </span><span class="n">LuaFunctionRef</span><span class="w"> </span><span class="n">get_message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">.</span><span class="n">As</span><span class="o">&lt;</span><span class="n">LuaFunctionRef</span><span class="o">&gt;</span><span class="p">();</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">get_message</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;ERROR: get_message is null.&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">        </span><span class="c1">// Calling Lua (code) functions requires a Godot.Collections.Array as the container</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="w">        </span><span class="c1">// for the parameters passed in. </span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="w">        </span><span class="n">Godot</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Array</span><span class="w"> </span><span class="n">Params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">();</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="w">        </span><span class="c1">// We use .Invoke to actually call the lua function within the Lua State. </span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="w">        </span><span class="c1">// And, finally, we log the output of the function to Godot Output Console.</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="n">get_message</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">Params</span><span class="p">));</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="p">}</span>
 </code></pre></div>
 
 
@@ -995,7 +1016,7 @@ example work, we will first wrap our called function in a <code>Callable</code> 
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.94c44541.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.aecac24b.min.js"></script>
       
     
   </body>
