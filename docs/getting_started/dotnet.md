@@ -55,8 +55,15 @@ source within your IDE. If so, please use the `LuaAPINugetSource` option. Note t
 the specific location (`-s <source>`) and we are forcing (`-f`) the restore. This is done to specifically use the custom 
 nuget packages.
 
-Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the 
-Godot Editor.
+Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the
+Godot Editor. I highly recommend keeping this section handy, as you will need to use these for each new project
+that you create. If you can, it's advisable to change the nuget sources so that the local source is first in the
+list. This will make life easier. And then, with new projects, run the clear command, then restore the project in
+your IDE, or simply build the project in Godot. (Godot will perform a restore in the build process.) By having the
+local sources first in the list, this will ensure that they are put in, and that your project will work.
+
+A note on the LuaAPI specific nuget packages: They are included in the Mono (DotNet) builds from the `Releases` tab on
+the Github page.
 
 Example Notes
 -------
