@@ -830,8 +830,14 @@ Commands below for an example on how to do this.</p>
 source within your IDE. If so, please use the <code>LuaAPINugetSource</code> option. Note that in the third command, we are using 
 the specific location (<code>-s &lt;source&gt;</code>) and we are forcing (<code>-f</code>) the restore. This is done to specifically use the custom 
 nuget packages.</p>
-<p>Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the 
-Godot Editor.</p>
+<p>Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the
+Godot Editor. I highly recommend keeping this section handy, as you will need to use these for each new project
+that you create. If you can, it's advisable to change the nuget sources so that the local source is first in the
+list. This will make life easier. And then, with new projects, run the clear command, then restore the project in
+your IDE, or simply build the project in Godot. (Godot will perform a restore in the build process.) By having the
+local sources first in the list, this will ensure that they are put in, and that your project will work.</p>
+<p>A note on the LuaAPI specific nuget packages: They are included in the Mono (DotNet) builds from the <code>Releases</code> tab on
+the Github page.</p>
 <h2 id="example-notes">Example Notes</h2>
 <p>As you can expect, the method names in the LuaAPI class are in Dotnet style. So, something like <code>LuaAPI.push_variant</code> 
 would be <code>LuaAPI.PushVariant</code></p>
