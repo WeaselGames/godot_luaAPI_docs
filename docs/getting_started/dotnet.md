@@ -44,16 +44,19 @@ Commands
 
 In your command prompt, execute these commands in the following order.
 
-`dotnet nuget locals all --clear`
+`dotnet nuget locals all --clear`  -- This command clears the local package directory, so if updating, copy the proper 
+packages from the archive, so that they are there before proceeding.
 
-`dotnet nuget add source /path/to/nuget_packages/ --name LuaAPINugetSource`
+`dotnet nuget add source /path/to/nuget_packages --name LuaAPINugetSource` -- Only necessary if the source hasn't yet been added.
 
 `dotnet restore '/pathtoproject/example_project.csproj' -f -s  LuaAPINugetSource`
 
 This will set up the proper packages to work with the Editor / Add-on. Note: you may have to select the correct nuget 
 source within your IDE. If so, please use the `LuaAPINugetSource` option. Note that in the third command, we are using 
 the specific location (`-s <source>`) and we are forcing (`-f`) the restore. This is done to specifically use the custom 
-nuget packages.
+nuget packages. If you get errors, you can use `dotnet nuget list source` to list the sources. Also, there's a `remove` 
+command that will allow you to redo the source add. Note that putting a trailing `/` on the endo of the path will generally 
+mess up the local source. 
 
 Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the
 Godot Editor. I highly recommend keeping this section handy, as you will need to use these for each new project
