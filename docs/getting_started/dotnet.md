@@ -44,16 +44,19 @@ Commands
 
 In your command prompt, execute these commands in the following order.
 
-`dotnet nuget locals all --clear`
+`dotnet nuget locals all --clear`  -- This command clears the local package directory, so if updating, copy the proper 
+packages from the archive, so that they are there before proceeding.
 
-`dotnet nuget add source /path/to/nuget_packages/ --name LuaAPINugetSource`
+`dotnet nuget add source /path/to/nuget_packages --name LuaAPINugetSource` -- Only necessary if the source hasn't yet been added.
 
 `dotnet restore '/pathtoproject/example_project.csproj' -f -s  LuaAPINugetSource`
 
 This will set up the proper packages to work with the Editor / Add-on. Note: you may have to select the correct nuget 
 source within your IDE. If so, please use the `LuaAPINugetSource` option. Note that in the third command, we are using 
 the specific location (`-s <source>`) and we are forcing (`-f`) the restore. This is done to specifically use the custom 
-nuget packages.
+nuget packages. If you get errors, you can use `dotnet nuget list source` to list the sources. Also, there's a `remove` 
+command that will allow you to redo the source add. Note that putting a trailing `/` on the endo of the path will generally 
+mess up the local source. 
 
 Once you have done this, you will need to rebuild your project. You can do so either through your IDE or inside of the
 Godot Editor. I highly recommend keeping this section handy, as you will need to use these for each new project
@@ -64,6 +67,34 @@ local sources first in the list, this will ensure that they are put in, and that
 
 A note on the LuaAPI specific nuget packages: They are included in the Mono (DotNet) builds from the `Releases` tab on
 the Github page.
+
+Additional help with the Nuget Packages installation:
+In some cases the packages will fail to restore, and if that happens to you, this is something that you can do to try
+to make it work. You will need to remove the existing `LuaAPINugetSource` that you made above, and then put this file
+in your project directory. As it uses an absolute path, others will need to change it to their location, if they are
+part of your team. (Like an open source project, or if they are compiling the code themselves.)
+* Create a nuget.config file in the root of your project or solution (if it doesn't already exist).
+* Open or create the nuget.config file, and add the following:
+
+```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <configuration>
+      <packageSources>
+        <add key="LuaAPINugetSource" value="/path/to/editor/editor-mono/nuget_packages" />
+        <!-- Add other package sources if needed -->
+      </packageSources>
+    </configuration>
+```
+
+* Replace `/path/to/editor/editor-mono/nuget_packages` with the correct path to your local NuGet source. Note the
+  lack of a trailing slash.
+* Save the nuget.config file.
+
+With this configuration, the NuGet restore process will automatically consider the sources listed in the nuget.config.
+Note that windows users may have other issues with dotnet, files being marked unsafe because they originated from other
+computers, not being done as an administrator, etc. Sadly, those are on the user to fix as it is beyond the scope of a
+getting started file.
+
 
 Example Notes
 -------
